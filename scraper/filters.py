@@ -29,7 +29,8 @@ import re
 import lets
 from config import (BUY, BUY_NOT_WANTED, CITY, FAVOURITE_POSTCODES, GONE_WORDS,
                     HOME_WORDS, NEGATIONS, NOT_A_HOME_ANYWHERE, NOT_A_HOME_IN_TITLE,
-                    POSTCODES, RENT, RESERVED_FOR_GROUPS, ROOM_PHRASES_IN_TEXT,
+                    POSTCODES, RENT, RENT_STRETCH_MAX_PRICE, RESERVED_FOR_GROUPS,
+                    ROOM_PHRASES_IN_TEXT,
                     ROOM_WORDS_IN_TITLE, ROOMS_MINUS)
 
 
@@ -168,7 +169,9 @@ def check(listing, today=None):
     price = total_price(listing)
     if not price:
         return False, "no price"
-    if price > rule["max_price"]:
+    # (Rent may go up to the second rent tab's limit; tab() below decides
+    # which of the two rent tabs a listing belongs in.)
+    if price > (RENT_STRETCH_MAX_PRICE if renting else rule["max_price"]):
         return False, "too expensive (%d)" % price
     if not listing.get("m2"):
         return False, "no size"
@@ -179,6 +182,22 @@ def check(listing, today=None):
     if listing["bedrooms"] not in rule["bedrooms"]:
         return False, "%d bedrooms" % listing["bedrooms"]
     return True, ""
+
+
+def tab(listing, today=None):
+    """
+    Which tab of the site a listing belongs in. Exactly one, or None:
+      "rent"          total rent up to RENT max_price (1,800)
+      "rent_stretch"  total rent above that, up to RENT_STRETCH_MAX_PRICE (2,000)
+      "buy"           homes for sale
+      None            fails a rule; shown nowhere
+    """
+    ok, _ = check(listing, today)
+    if not ok:
+        return None
+    if listing.get("kind") != "rent":
+        return "buy"
+    return "rent" if total_price(listing) <= RENT["max_price"] else "rent_stretch"
 
 
 def place(postcode):

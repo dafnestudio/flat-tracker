@@ -78,8 +78,11 @@ class MustFail(unittest.TestCase):
         self.reject(flat(title="Parkeerplaats te huur Overtoom", type_text="Parkeerplaats"),
                     "not a home")
 
-    def test_flat_of_1850(self):
-        self.reject(flat(price=1850), "expensive")
+    def test_flat_of_1850_is_not_in_the_rent_tab(self):
+        # Since the "Rent €1,800–2,000" tab exists, a €1,850 flat is kept
+        # for that tab, but it must never appear in the main Rent tab.
+        self.assertNotEqual(filters.tab(flat(price=1850), TODAY), "rent")
+        self.reject(flat(price=2001), "expensive")
 
     def test_flat_of_45_m2(self):
         self.reject(flat(m2=45), "small")
@@ -117,6 +120,49 @@ class MustPass(unittest.TestCase):
                     postcode="1094", price=480000, m2=60, bedrooms=2,
                     text="Instapklaar appartement met balkon. Eigen grond.")
         self.assertEqual(check(home), (True, ""))
+
+
+class RentTabs(unittest.TestCase):
+    """The second rent tab, "Rent €1,800–2,000"."""
+
+    def tab(self, **changes):
+        return filters.tab(flat(**changes), TODAY)
+
+    def test_1950_flat_on_the_overtoom_is_in_the_new_tab_only(self):
+        self.assertEqual(self.tab(price=1950), "rent_stretch")
+
+    def test_1750_flat_is_in_rent_only(self):
+        self.assertEqual(self.tab(price=1750), "rent")
+
+    def test_2050_flat_is_in_neither(self):
+        self.assertIsNone(self.tab(price=2050))
+
+    def test_1900_room_is_in_neither(self):
+        self.assertIsNone(self.tab(price=1900, title="Kamer te huur Overtoom",
+                                   type_text="Kamer"))
+
+    def test_the_boundaries(self):
+        self.assertEqual(self.tab(price=1800), "rent")
+        self.assertEqual(self.tab(price=1801), "rent_stretch")
+        self.assertEqual(self.tab(price=2000), "rent_stretch")
+        self.assertIsNone(self.tab(price=2001))
+
+    def test_service_costs_count_towards_the_total(self):
+        self.assertEqual(self.tab(price=1750, service_costs=100), "rent_stretch")
+        self.assertEqual(self.tab(price=1900, service_costs=100), "rent_stretch")
+        self.assertIsNone(self.tab(price=1950, service_costs=100))
+
+    def test_every_other_rent_rule_still_applies_in_the_new_tab(self):
+        for change in [dict(postcode="1033"), dict(postcode=None), dict(m2=45),
+                       dict(bedrooms=3), dict(status="Onder optie"),
+                       dict(title="Studio te huur", type_text=""),
+                       dict(text="Available for 1 month only."),
+                       dict(text="Jongerencontract, 18 t/m 27 jaar."),
+                       dict(url="")]:
+            self.assertIsNone(self.tab(price=1950, **change), change)
+
+    def test_buying_has_its_own_tab(self):
+        self.assertEqual(self.tab(kind="buy", price=450000, text="Mooi appartement."), "buy")
 
 
 class OnlyWholeHomes(unittest.TestCase):
@@ -340,9 +386,10 @@ class PriceSizeBedrooms(unittest.TestCase):
 
     def test_service_costs_are_added(self):
         self.assertEqual(check(flat(price=1700, service_costs=100)), (True, ""))
-        ok, why = check(flat(price=1750, service_costs=75))
+        self.assertEqual(filters.tab(flat(price=1750, service_costs=75), TODAY), "rent_stretch")
+        ok, why = check(flat(price=1950, service_costs=75))
         self.assertFalse(ok)
-        self.assertIn("1825", why)
+        self.assertIn("2025", why)
 
     def test_size_limits(self):
         self.assertEqual(check(flat(m2=50)), (True, ""))
@@ -443,6 +490,7 @@ class TheWebsiteItself(unittest.TestCase):
             ok, why = filters.check(again)
             self.assertTrue(ok, "%s: %s" % (item["url"], why))
             self.assertIn(item["type"], ("Apartment", "Maisonette", "House"))
+            self.assertEqual(item.get("tab", item["kind"]), filters.tab(again), item["url"])
             if item["kind"] == "rent":
                 months = item.get("fixed_term_months")
                 self.assertTrue(months is None or months >= 6, item["url"])

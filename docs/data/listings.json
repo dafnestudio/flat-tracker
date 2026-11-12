@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T15:25:36Z",
+ "updated": "2026-11-12T15:58:14Z",
  "filters": {
   "rent": {
    "max_price": 1800,
@@ -9,6 +9,7 @@
     2
    ]
   },
+  "rent_stretch_max_price": 2000,
   "buy": {
    "max_price": 500000,
    "min_m2": 55,
@@ -52,14 +53,14 @@
    "name": "Rentola",
    "ok": true,
    "found": 469,
-   "shown": 3,
+   "shown": 7,
    "note": ""
   },
   {
    "name": "ikwilhuren.nu (MVGM)",
    "ok": true,
    "found": 292,
-   "shown": 3,
+   "shown": 11,
    "note": ""
   },
   {
@@ -87,28 +88,28 @@
    "name": "VB&T",
    "ok": true,
    "found": 40,
-   "shown": 5,
+   "shown": 6,
    "note": ""
   },
   {
    "name": "Fris",
    "ok": true,
    "found": 45,
-   "shown": 0,
+   "shown": 1,
    "note": ""
   },
   {
    "name": "Rotsvast",
-   "ok": true,
+   "ok": false,
    "found": 0,
    "shown": 0,
-   "note": "Nothing found in Amsterdam today. If this stays at 0 for days, the site's layout may have changed."
+   "note": "Blocked: robots.txt does not allow https://www.rotsvast.nl/wonen/"
   },
   {
    "name": "Van der Linden",
    "ok": true,
-   "found": 138,
-   "shown": 13,
+   "found": 139,
+   "shown": 16,
    "note": ""
   }
  ],
@@ -176,7 +177,8 @@
     "Registration: ask",
     "Bedrooms worked out from rooms",
     "Includes €125 service costs"
-   ]
+   ],
+   "tab": "rent"
   },
   {
    "source": "Van der Linden",
@@ -210,6 +212,607 @@
    "tags": [
     "Registration: ask",
     "Includes €85 service costs"
+   ],
+   "tab": "rent"
+  },
+  {
+   "source": "Van der Linden",
+   "kind": "rent",
+   "url": "https://www.vanderlinden.nl/huurwoning/Wijnsilostraat-12-Amsterdam/2561/",
+   "address": "Wijnsilostraat 12, Amsterdam",
+   "city": "Amsterdam",
+   "m2": 85,
+   "bedrooms": 2,
+   "bedrooms_estimated": false,
+   "postcode": "1019",
+   "posted": null,
+   "title": "",
+   "type_text": "",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1910,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Wijnsilostraat 12 Amsterdam te huur - Makelaardij Van der Linden | Wijnsilostraat 12 | ad text: appartement",
+   "service_costs": 0,
+   "home_key": "rent:1019:wijnsilostraat12",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1910,
+   "area": "Oost",
+   "neighbourhood": "Oostelijk Havengebied",
+   "favourite": false,
+   "rental_period": "Fixed term: 12 months",
+   "fixed_term_months": 12,
+   "registration": "not stated",
+   "tags": [
+    "Fixed term: 12 months",
+    "Registration: ask"
+   ]
+  },
+  {
+   "source": "Van der Linden",
+   "kind": "rent",
+   "url": "https://www.vanderlinden.nl/huurwoning/Lorriestraat-38-Amsterdam/2614/",
+   "address": "Lorriestraat 38, Amsterdam",
+   "city": "Amsterdam",
+   "m2": 65,
+   "bedrooms": 1,
+   "bedrooms_estimated": false,
+   "postcode": "1019",
+   "posted": null,
+   "title": "",
+   "type_text": "",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1820,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Lorriestraat 38 Amsterdam te huur - Makelaardij Van der Linden | Lorriestraat 38 | ad text: appartement",
+   "service_costs": 0,
+   "home_key": "rent:1019:lorriestraat38",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1820,
+   "area": "Oost",
+   "neighbourhood": "Oostelijk Havengebied",
+   "favourite": false,
+   "rental_period": "Fixed term: 12 months",
+   "fixed_term_months": 12,
+   "registration": "not allowed",
+   "tags": [
+    "Fixed term: 12 months",
+    "No registration"
+   ]
+  },
+  {
+   "source": "Van der Linden",
+   "kind": "rent",
+   "url": "https://www.vanderlinden.nl/huurwoning/Zeeburgerkade-1470-Amsterdam/2698/",
+   "address": "Zeeburgerkade 1470, Amsterdam",
+   "city": "Amsterdam",
+   "m2": 86,
+   "bedrooms": 2,
+   "bedrooms_estimated": false,
+   "postcode": "1019",
+   "posted": null,
+   "title": "",
+   "type_text": "",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1905,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Zeeburgerkade 1470 Amsterdam te huur - Makelaardij Van der Linden | Zeeburgerkade 1470 | ad text: 3-kamerappartement",
+   "service_costs": 0,
+   "home_key": "rent:1019:zeeburgerkade1470",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1905,
+   "area": "Oost",
+   "neighbourhood": "Oostelijk Havengebied",
+   "favourite": false,
+   "rental_period": "Fixed term: 12 months",
+   "fixed_term_months": 12,
+   "registration": "not stated",
+   "tags": [
+    "Fixed term: 12 months",
+    "Registration: ask"
+   ]
+  },
+  {
+   "source": "Fris",
+   "kind": "rent",
+   "url": "https://fris.nl/volledige-woningaanbod/elzenhagensingel-262-amsterdam/",
+   "address": "Elzenhagensingel 262 1022 LA Amsterdam",
+   "city": "Amsterdam",
+   "m2": 72,
+   "bedrooms": 2,
+   "bedrooms_estimated": false,
+   "postcode": "1022",
+   "posted": null,
+   "title": "",
+   "type_text": "",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1959,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Elzenhagensingel 262 - Amsterdam - Fris Real People | Elzenhagensingel 262 – Amsterdam | ad text: tweekamerappartement",
+   "service_costs": 0,
+   "home_key": "rent:1022:elzenhagensingel262",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1959,
+   "area": "Noord",
+   "neighbourhood": "Nieuwendammerham",
+   "favourite": false,
+   "rental_period": "Not stated",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Check rental period",
+    "Registration: ask"
+   ]
+  },
+  {
+   "source": "VB&T",
+   "kind": "rent",
+   "url": "https://vbtverhuurmakelaars.nl/woning/amsterdam-grasweg-298",
+   "address": "Grasweg 298, Amsterdam",
+   "city": "Amsterdam",
+   "m2": 69,
+   "bedrooms": 2,
+   "bedrooms_estimated": true,
+   "postcode": "1031",
+   "posted": null,
+   "title": "",
+   "type_text": "Appartement",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1795,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Appartement | Appartement Grasweg 298 Amsterdam Te Huur | vb&t Verhuurmakelaars | Grasweg 298 | Appartement Soort bouw Bestaande bouw Bouwjaa",
+   "service_costs": 78,
+   "home_key": "rent:1031:grasweg298",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1873,
+   "area": "Noord",
+   "neighbourhood": "Overhoeks / Van der Pek / Buiksloterham",
+   "favourite": false,
+   "rental_period": "Minimum 12 months",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Registration: ask",
+    "Bedrooms worked out from rooms",
+    "Includes €78 service costs"
+   ]
+  },
+  {
+   "source": "ikwilhuren.nu (MVGM)",
+   "kind": "rent",
+   "url": "https://ikwilhuren.nu/object/amsterdam-1014ag-8-c1-molenwerf-ppl-149-44e6e56cc8162dd8a991fa941b1bb824/",
+   "address": "Molenwerf + PPL 149 8 C1 1014AG Amsterdam",
+   "city": "Amsterdam",
+   "m2": 67,
+   "bedrooms": 1,
+   "bedrooms_estimated": false,
+   "postcode": "1014",
+   "posted": null,
+   "title": "",
+   "type_text": "Appartement",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1855,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Appartement | MVGM - Te huur: Molenwerf + ppl 149 8 c1, amsterdam | Te huur: Molenwerf + PPL 149 8 C1",
+   "service_costs": 120,
+   "home_key": "rent:1014:molenwerfppl1498c1",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1975,
+   "area": "Sloterdijk",
+   "neighbourhood": "Sloterdijk",
+   "favourite": false,
+   "rental_period": "Not stated",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Check rental period",
+    "Registration: ask",
+    "Includes €120 service costs"
+   ]
+  },
+  {
+   "source": "ikwilhuren.nu (MVGM)",
+   "kind": "rent",
+   "url": "https://ikwilhuren.nu/object/amsterdam-1014ag-4-f6-molenwerf-ppl-225-65d7013dcb5bd296ed0aef9f74cf1d16/",
+   "address": "Molenwerf + PPL 225 4 F6 1014AG Amsterdam",
+   "city": "Amsterdam",
+   "m2": 61,
+   "bedrooms": 1,
+   "bedrooms_estimated": false,
+   "postcode": "1014",
+   "posted": null,
+   "title": "",
+   "type_text": "Appartement",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1795,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Appartement | MVGM - Te huur: Molenwerf + ppl 225 4 f6, amsterdam | Te huur: Molenwerf + PPL 225 4 F6",
+   "service_costs": 120,
+   "home_key": "rent:1014:molenwerfppl2254f6",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1915,
+   "area": "Sloterdijk",
+   "neighbourhood": "Sloterdijk",
+   "favourite": false,
+   "rental_period": "Not stated",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Check rental period",
+    "Registration: ask",
+    "Includes €120 service costs"
+   ]
+  },
+  {
+   "source": "ikwilhuren.nu (MVGM)",
+   "kind": "rent",
+   "url": "https://ikwilhuren.nu/object/amsterdam-1018pn-87-soerapatistraat-540c78236f64830e67af36dd983b3799/",
+   "address": "Soerapatistraat 87 1018PN Amsterdam",
+   "city": "Amsterdam",
+   "m2": 67,
+   "bedrooms": 2,
+   "bedrooms_estimated": false,
+   "postcode": "1018",
+   "posted": null,
+   "title": "",
+   "type_text": "Appartement",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1905,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Appartement | MVGM - Te huur: Soerapatistraat 87, amsterdam | Te huur: Soerapatistraat 87",
+   "service_costs": 89,
+   "home_key": "rent:1018:soerapatistraat87",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1994,
+   "area": "Oost",
+   "neighbourhood": "Plantage / Oostelijke Eilanden",
+   "favourite": false,
+   "rental_period": "Not stated",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Check rental period",
+    "Registration: ask",
+    "Includes €89 service costs"
+   ]
+  },
+  {
+   "source": "ikwilhuren.nu (MVGM)",
+   "kind": "rent",
+   "url": "https://ikwilhuren.nu/object/amsterdam-1043ch-320-heathrowstraat-ec53b33e35e396530cbbde91d061619a/",
+   "address": "Heathrowstraat 320 1043CH Amsterdam",
+   "city": "Amsterdam",
+   "m2": 74,
+   "bedrooms": 2,
+   "bedrooms_estimated": false,
+   "postcode": "1043",
+   "posted": null,
+   "title": "",
+   "type_text": "Appartement",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1884,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Appartement | MVGM - Te huur: Heathrowstraat 320, amsterdam | Te huur: Heathrowstraat 320",
+   "service_costs": 85,
+   "home_key": "rent:1043:heathrowstraat320",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1969,
+   "area": "Sloterdijk",
+   "neighbourhood": "Sloterdijk / Teleport",
+   "favourite": false,
+   "rental_period": "Not stated",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Check rental period",
+    "Registration: ask",
+    "Includes €85 service costs"
+   ]
+  },
+  {
+   "source": "ikwilhuren.nu (MVGM)",
+   "kind": "rent",
+   "url": "https://ikwilhuren.nu/object/amsterdam-1095mp-4-eef-kamerbeekstraat-875efa5defa277f8672b0707b4d3d0c7/",
+   "address": "Eef Kamerbeekstraat 4 1095MP Amsterdam",
+   "city": "Amsterdam",
+   "m2": 66,
+   "bedrooms": 1,
+   "bedrooms_estimated": false,
+   "postcode": "1095",
+   "posted": null,
+   "title": "",
+   "type_text": "Appartement",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1828,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Appartement | MVGM - Te huur: Eef kamerbeekstraat 4, amsterdam | Te huur: Eef Kamerbeekstraat 4",
+   "service_costs": 60,
+   "home_key": "rent:1095:eefkamerbeekstraat4",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1888,
+   "area": "Oost",
+   "neighbourhood": "Indische Buurt / Zeeburgereiland",
+   "favourite": false,
+   "rental_period": "Not stated",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Check rental period",
+    "Registration: ask",
+    "Includes €60 service costs"
+   ]
+  },
+  {
+   "source": "ikwilhuren.nu (MVGM)",
+   "kind": "rent",
+   "url": "https://ikwilhuren.nu/object/amsterdam-1014bg-10-e3-molenwerf-ppl-87-9059a254982836c541b7c5eba42eb7dc/",
+   "address": "Molenwerf + PPL 87 10 E3 1014BG Amsterdam",
+   "city": "Amsterdam",
+   "m2": 61,
+   "bedrooms": 1,
+   "bedrooms_estimated": false,
+   "postcode": "1014",
+   "posted": null,
+   "title": "",
+   "type_text": "Appartement",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1795,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Appartement | MVGM - Te huur: Molenwerf + ppl 87 10 e3, amsterdam | Te huur: Molenwerf + PPL 87 10 E3",
+   "service_costs": 120,
+   "home_key": "rent:1014:molenwerfppl8710e3",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1915,
+   "area": "Sloterdijk",
+   "neighbourhood": "Sloterdijk",
+   "favourite": false,
+   "rental_period": "Not stated",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Check rental period",
+    "Registration: ask",
+    "Includes €120 service costs"
+   ]
+  },
+  {
+   "source": "ikwilhuren.nu (MVGM)",
+   "kind": "rent",
+   "url": "https://ikwilhuren.nu/object/amsterdam-1095ms-53-kees-broekmanstraat-e7bc92022978ad27f1a8051693b62e0e/",
+   "address": "Kees Broekmanstraat 53 1095MS Amsterdam",
+   "city": "Amsterdam",
+   "m2": 67,
+   "bedrooms": 1,
+   "bedrooms_estimated": false,
+   "postcode": "1095",
+   "posted": null,
+   "title": "",
+   "type_text": "Appartement",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1855,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Appartement | MVGM - Te huur: Kees broekmanstraat 53, amsterdam | Te huur: Kees Broekmanstraat 53",
+   "service_costs": 60,
+   "home_key": "rent:1095:keesbroekmanstraat53",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1915,
+   "area": "Oost",
+   "neighbourhood": "Indische Buurt / Zeeburgereiland",
+   "favourite": false,
+   "rental_period": "Not stated",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Check rental period",
+    "Registration: ask",
+    "Includes €60 service costs"
+   ]
+  },
+  {
+   "source": "ikwilhuren.nu (MVGM)",
+   "kind": "rent",
+   "url": "https://ikwilhuren.nu/object/amsterdam-1095me-162-mary-van-der-sluisstraat-0593c5c52c46c4b19374b5c6296be02a/",
+   "address": "Mary van der Sluisstraat 162 1095ME Amsterdam",
+   "city": "Amsterdam",
+   "m2": 64,
+   "bedrooms": 1,
+   "bedrooms_estimated": false,
+   "postcode": "1095",
+   "posted": null,
+   "title": "",
+   "type_text": "Appartement",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1752,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Appartement | MVGM - Te huur: Mary van der sluisstraat 162, amsterdam | Te huur: Mary van der Sluisstraat 162",
+   "service_costs": 80,
+   "home_key": "rent:1095:maryvandersluisstraat162",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1832,
+   "area": "Oost",
+   "neighbourhood": "Indische Buurt / Zeeburgereiland",
+   "favourite": false,
+   "rental_period": "Not stated",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Check rental period",
+    "Registration: ask",
+    "Includes €80 service costs"
+   ]
+  },
+  {
+   "source": "Rentola",
+   "kind": "rent",
+   "url": "https://rentola.nl/listings/appartement-te-huur-p7a0436",
+   "address": "Weesperstraat 346, 1018 DN Amsterdam",
+   "city": "Amsterdam",
+   "m2": 72,
+   "bedrooms": 2,
+   "bedrooms_estimated": false,
+   "postcode": "1018",
+   "posted": "2026-11-07",
+   "title": "Appartement te huur",
+   "type_text": "Apartment",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 2000,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Appartement te huur | Apartment | Appartement (72.0 m²) te huur in Amsterdam (Weesperstraat 346, 1018 DN Amsterdam, Netherlands) - rentola.nl | 2-slaapkamer appartement van 72 m² in Amsterdam | appartement Grootte",
+   "service_costs": 0,
+   "home_key": "rent:1018:weesperstraat346",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 2000,
+   "area": "Oost",
+   "neighbourhood": "Plantage / Oostelijke Eilanden",
+   "favourite": false,
+   "rental_period": "Indefinite",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Registration: ask"
+   ]
+  },
+  {
+   "source": "Rentola",
+   "kind": "rent",
+   "url": "https://rentola.nl/listings/appartement-te-huur-pe47d94",
+   "address": "Mercatorplein, Mercatorplein 16-3, 1057 CB Amsterdam",
+   "city": "Amsterdam",
+   "m2": 56,
+   "bedrooms": 1,
+   "bedrooms_estimated": false,
+   "postcode": "1057",
+   "posted": "2026-11-03",
+   "title": "Appartement te huur",
+   "type_text": "Apartment",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 2000,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Appartement te huur | Apartment | Appartement (56.0 m²) te huur in Amsterdam (Mercatorplein, Mercatorplein 16-3, 1057 CB Amsterdam, Netherlands) - rentola.nl | 1-slaapkamer appartement van 56 m² in Amsterdam | Gemiddelde maandelijkse huur Appartement €",
+   "service_costs": 0,
+   "home_key": "rent:1057:mercatorpleinmercatorplein163",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 2000,
+   "area": "West",
+   "neighbourhood": "De Baarsjes",
+   "favourite": false,
+   "rental_period": "Indefinite",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Registration: ask"
+   ]
+  },
+  {
+   "source": "Rentola",
+   "kind": "rent",
+   "url": "https://rentola.nl/listings/te-huur-appartement-mercatorplein-16-1-in-amsterdam-p1beb77",
+   "address": "Mercatorplein, Mercatorplein 16-1, 1057 CB Amsterdam",
+   "city": "Amsterdam",
+   "m2": 56,
+   "bedrooms": 2,
+   "bedrooms_estimated": false,
+   "postcode": "1057",
+   "posted": "2026-11-04",
+   "title": "Te huur: Appartement Mercatorplein 16 1 in Amsterdam",
+   "type_text": "Apartment",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 2000,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Te huur: Appartement Mercatorplein 16 1 in Amsterdam | Apartment | Appartement (56.0 m²) te huur in Amsterdam (Mercatorplein, Mercatorplein 16-1, 1057 CB Amsterdam, Netherlands) - rentola.nl | 2-slaapkamer appartement van 56 m² in Amsterdam | Gemiddelde maandelijkse huur Appartement €",
+   "service_costs": 0,
+   "home_key": "rent:1057:mercatorpleinmercatorplein161",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 2000,
+   "area": "West",
+   "neighbourhood": "De Baarsjes",
+   "favourite": false,
+   "rental_period": "Indefinite",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Registration: ask"
+   ]
+  },
+  {
+   "source": "Rentola",
+   "kind": "rent",
+   "url": "https://rentola.nl/listings/house-at-rijtuigenhof-1054nb-amsterdam-netherlands-p42b84b",
+   "address": "Rijtuigenhof, 1054 NC Amsterdam",
+   "city": "Amsterdam",
+   "m2": 60,
+   "bedrooms": 2,
+   "bedrooms_estimated": false,
+   "postcode": "1054",
+   "posted": "2026-11-07",
+   "title": "house at Rijtuigenhof, 1054NB Amsterdam, Netherlands",
+   "type_text": "House",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1850,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "house at Rijtuigenhof, 1054NB Amsterdam, Netherlands | House | Huis (60.0 m²) te huur in Amsterdam (Rijtuigenhof, 1054 NC Amsterdam, Netherlands) - rentola.nl | 2-slaapkamer huis van 60 m² in Amsterdam | Gemiddelde maandelijkse huur Appartement €",
+   "service_costs": 0,
+   "home_key": null,
+   "tab": "rent_stretch",
+   "type": "House",
+   "price": 1850,
+   "area": "West",
+   "neighbourhood": "Oud-West / Overtoom",
+   "favourite": true,
+   "rental_period": "Indefinite",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Registration: ask"
    ]
   },
   {
@@ -237,7 +840,8 @@
    "type": "Apartment",
    "home_key": "buy:1091:tugelaweg139f",
    "rental_period": "",
-   "fixed_term_months": null
+   "fixed_term_months": null,
+   "tab": "buy"
   },
   {
    "source": "Van der Linden",
@@ -264,7 +868,8 @@
    "type": "Apartment",
    "home_key": "buy:1056:janvangalenstraat1701",
    "rental_period": "",
-   "fixed_term_months": null
+   "fixed_term_months": null,
+   "tab": "buy"
   },
   {
    "source": "Van der Linden",
@@ -291,7 +896,8 @@
    "type": "Apartment",
    "home_key": "buy:1056:hoofdweg416h",
    "rental_period": "",
-   "fixed_term_months": null
+   "fixed_term_months": null,
+   "tab": "buy"
   },
   {
    "source": "Van der Linden",
@@ -325,7 +931,8 @@
    "tags": [
     "Fixed term: 12 months",
     "Registration: ask"
-   ]
+   ],
+   "tab": "rent"
   },
   {
    "source": "Van der Linden",
@@ -359,7 +966,8 @@
    "tags": [
     "Fixed term: 12 months",
     "Registration: ask"
-   ]
+   ],
+   "tab": "rent"
   },
   {
    "source": "Van der Linden",
@@ -393,7 +1001,8 @@
    "tags": [
     "Fixed term: 12 months",
     "Registration: ask"
-   ]
+   ],
+   "tab": "rent"
   },
   {
    "source": "Van der Linden",
@@ -427,7 +1036,8 @@
    "tags": [
     "Fixed term: 12 months",
     "Registration: ask"
-   ]
+   ],
+   "tab": "rent"
   },
   {
    "source": "Van der Linden",
@@ -461,7 +1071,8 @@
    "tags": [
     "Fixed term: 12 months",
     "Registration: ask"
-   ]
+   ],
+   "tab": "rent"
   },
   {
    "source": "Van der Linden",
@@ -495,7 +1106,8 @@
    "tags": [
     "Fixed term: 12 months",
     "Registration: ask"
-   ]
+   ],
+   "tab": "rent"
   },
   {
    "source": "Van der Linden",
@@ -529,7 +1141,8 @@
    "tags": [
     "Fixed term: 12 months",
     "Registration: ask"
-   ]
+   ],
+   "tab": "rent"
   },
   {
    "source": "Van der Linden",
@@ -560,7 +1173,8 @@
    "rental_period": "",
    "fixed_term_months": null,
    "registration": "not stated",
-   "tags": []
+   "tags": [],
+   "tab": "buy"
   },
   {
    "source": "VB&T",
@@ -592,7 +1206,8 @@
    "type": "Apartment",
    "home_key": "rent:1031:spadinalaan275",
    "rental_period": "Minimum 12 months",
-   "fixed_term_months": null
+   "fixed_term_months": null,
+   "tab": "rent"
   },
   {
    "source": "VB&T",
@@ -624,7 +1239,8 @@
    "type": "Apartment",
    "home_key": "rent:1031:sausalitolaan212",
    "rental_period": "Minimum 12 months",
-   "fixed_term_months": null
+   "fixed_term_months": null,
+   "tab": "rent"
   },
   {
    "source": "VB&T",
@@ -656,7 +1272,8 @@
    "type": "Apartment",
    "home_key": "rent:1031:ceramiquelaan441",
    "rental_period": "Minimum 12 months",
-   "fixed_term_months": null
+   "fixed_term_months": null,
+   "tab": "rent"
   },
   {
    "source": "VB&T",
@@ -688,7 +1305,8 @@
    "type": "Apartment",
    "home_key": "rent:1019:vluchtladderstraat16",
    "rental_period": "Minimum 12 months",
-   "fixed_term_months": null
+   "fixed_term_months": null,
+   "tab": "rent"
   },
   {
    "source": "VB&T",
@@ -721,7 +1339,8 @@
    ],
    "home_key": "rent:1031:hammarbystraat176",
    "rental_period": "Minimum 12 months",
-   "fixed_term_months": null
+   "fixed_term_months": null,
+   "tab": "rent"
   },
   {
    "source": "ikwilhuren.nu (MVGM)",
@@ -753,7 +1372,8 @@
    "type": "Apartment",
    "home_key": "rent:1043:radarweg251a",
    "rental_period": "Not stated",
-   "fixed_term_months": null
+   "fixed_term_months": null,
+   "tab": "rent"
   },
   {
    "source": "ikwilhuren.nu (MVGM)",
@@ -788,7 +1408,8 @@
     "Check rental period",
     "Registration: ask",
     "Includes €80 service costs"
-   ]
+   ],
+   "tab": "rent"
   },
   {
    "source": "ikwilhuren.nu (MVGM)",
@@ -823,7 +1444,8 @@
     "Check rental period",
     "Registration: ask",
     "Includes €80 service costs"
-   ]
+   ],
+   "tab": "rent"
   },
   {
    "source": "Rentola",
@@ -856,7 +1478,8 @@
    "registration": "allowed",
    "tags": [
     "Registration allowed"
-   ]
+   ],
+   "tab": "rent"
   },
   {
    "source": "Rentola",
@@ -889,7 +1512,8 @@
    "registration": "not stated",
    "tags": [
     "Registration: ask"
-   ]
+   ],
+   "tab": "rent"
   },
   {
    "source": "Rentola",
@@ -922,7 +1546,8 @@
    "registration": "not stated",
    "tags": [
     "Registration: ask"
-   ]
+   ],
+   "tab": "rent"
   }
  ]
 }

@@ -30,7 +30,8 @@ import register
 import scam
 import sources
 from config import (BUY, COPIED_TEXT_SENTENCES, MAX_FAILED_CHECKS, OPEN_PLATFORMS,
-                    POSTCODES, RENT, SOURCE_PRIORITY, TYPE_FROM_AD_TEXT_SOURCES,
+                    POSTCODES, RENT, RENT_STRETCH_MAX_PRICE, SOURCE_PRIORITY,
+                    TYPE_FROM_AD_TEXT_SOURCES,
                     USE_ADDRESS_REGISTER)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -119,7 +120,8 @@ def main():
     result.sort(key=lambda item: item["first_seen"], reverse=True)
     output = {
         "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "filters": {"rent": RENT, "buy": BUY, "postcodes": sorted(POSTCODES)},
+        "filters": {"rent": RENT, "rent_stretch_max_price": RENT_STRETCH_MAX_PRICE,
+                    "buy": BUY, "postcodes": sorted(POSTCODES)},
         "sources": report,
         "not_included": [{"name": n, "note": why} for n, why in sources.NOT_INCLUDED],
         "listings": result,
@@ -152,7 +154,8 @@ def could_match(item):
     the real decision is filters.check() in check_ad().
     """
     rule = RENT if item["kind"] == "rent" else BUY
-    if not item["price"] or item["price"] > rule["max_price"]:
+    highest = RENT_STRETCH_MAX_PRICE if item["kind"] == "rent" else rule["max_price"]
+    if not item["price"] or item["price"] > highest:
         return False
     if item["m2"] and item["m2"] < rule["min_m2"]:
         return False
@@ -272,6 +275,7 @@ def check_ad(item, fresh):
     ok, reason = filters.check(facts)
     if not ok:
         return reason
+    item["tab"] = filters.tab(facts)          # rent / rent_stretch / buy
     item["type"] = filters.home_type(item["type_source"])[0]
     item["price"] = filters.total_price(
         {"kind": item["kind"], "price": item["base_price"],

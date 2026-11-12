@@ -9,7 +9,11 @@ const MARKS = [["saved", "Saved"], ["contacted", "Contacted"], ["viewing", "View
 const STORE_KEY = "flat-tracker-marks";
 
 let data = { listings: [], sources: [], not_included: [], updated: null };
-let state = { kind: "rent", area: "All" };
+let state = { tab: "rent", area: "All" };
+const TABS = ["rent", "rent_stretch", "buy"];
+// Which tab a listing is in. The daily run decides (rules in config.py);
+// each listing is in exactly one tab.
+const tabOf = (item) => item.tab || item.kind;
 let marks = loadMarks();
 
 // ---------------------------------------------------------------- helpers
@@ -53,7 +57,7 @@ function visibleListings() {
   const show = $("show").value;
 
   const items = data.listings.filter((item) => {
-    if (item.kind !== state.kind) return false;
+    if (tabOf(item) !== state.tab) return false;
     if (state.area === AREAS[1] ? !item.favourite : state.area !== "All" && item.area !== state.area) return false;
     if (item.price > maxPrice) return false;
     if ((item.m2 || 0) < minSize) return false;
@@ -145,17 +149,17 @@ function draw() {
       : "No listings yet. They appear after the first daily run."));
   }
 
-  const ofKind = data.listings.filter((item) => item.kind === state.kind);
+  const ofKind = data.listings.filter((item) => tabOf(item) === state.tab);
   const passes = ofKind.filter((item) => marks[item.url] === "pass").length;
   const fresh = ofKind.filter(isNew).length;
   $("summary").textContent = items.length + " shown · " + fresh + " new today" +
     (passes ? " · " + passes + " passed" + ($("show").value === "open" ? " (hidden)" : "") : "");
 
-  for (const kind of ["rent", "buy"]) {
-    $("count-" + kind).textContent = "(" + data.listings.filter((item) => item.kind === kind).length + ")";
+  for (const name of TABS) {
+    $("count-" + name).textContent = "(" + data.listings.filter((item) => tabOf(item) === name).length + ")";
   }
   document.querySelectorAll(".tab").forEach((tab) =>
-    tab.setAttribute("aria-selected", String(tab.dataset.kind === state.kind)));
+    tab.setAttribute("aria-selected", String(tab.dataset.tab === state.tab)));
   document.querySelectorAll(".chip").forEach((chip) =>
     chip.setAttribute("aria-pressed", String(chip.textContent === state.area)));
 }
@@ -201,7 +205,7 @@ AREAS.forEach((name) => {
   $("areas").append(chip);
 });
 document.querySelectorAll(".tab").forEach((tab) =>
-  tab.addEventListener("click", () => { state.kind = tab.dataset.kind; draw(); }));
+  tab.addEventListener("click", () => { state.tab = tab.dataset.tab; draw(); }));
 ["max-price", "min-size", "bedrooms", "sort", "show"].forEach((id) =>
   $(id).addEventListener("input", draw));
 

@@ -82,6 +82,9 @@ Every rule is in `scraper/config.py`, in numbered sections. Every listing,
 new or already on the site, must pass the gate in `scraper/filters.py` on
 every run. Anything unclear or missing is dropped.
 
+- **Three tabs.** Rent (total up to €1,800), Rent €1,800–2,000 (total from
+  €1,801 to €2,000, set by `RENT_STRETCH_MAX_PRICE`), and Buy. A listing is
+  in exactly one tab; all other rent rules are the same in both rent tabs.
 - **Price, size, bedrooms.** Rent up to €1,800 including separately listed
   service costs, 50 m² or more; buy up to €500,000 k.k., 55 m² or more;
   1 or 2 bedrooms ("2 kamers" = 1 bedroom, "3 kamers" = 2).

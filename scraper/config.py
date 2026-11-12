@@ -17,6 +17,12 @@ and English, upper or lower case. A few entries use ".." patterns
 # ===================================================================
 # Rent: total per month. Service costs an ad lists separately are added.
 RENT = {"max_price": 1800, "min_m2": 50, "bedrooms": (1, 2)}
+# Second rent tab on the site, "Rent €1,800–2,000": rentals whose total
+# is above RENT's max_price, up to and including this amount. Every other
+# rent rule (size, bedrooms, areas, type, period, scams) is identical.
+# A flat is in one tab only: up to 1800 = Rent, 1801-2000 = this tab.
+RENT_STRETCH_MAX_PRICE = 2000
+
 # Buy: asking price "k.k." (kosten koper).
 BUY = {"max_price": 500_000, "min_m2": 55, "bedrooms": (1, 2)}
 # "2 kamers" = 1 bedroom, "3 kamers" = 2 bedrooms: bedrooms = rooms - 1.
