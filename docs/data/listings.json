@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T20:45:41Z",
+ "updated": "2026-11-12T15:25:36Z",
  "filters": {
   "rent": {
    "max_price": 1800,
@@ -51,14 +51,14 @@
   {
    "name": "Rentola",
    "ok": true,
-   "found": 472,
-   "shown": 4,
+   "found": 469,
+   "shown": 3,
    "note": ""
   },
   {
    "name": "ikwilhuren.nu (MVGM)",
    "ok": true,
-   "found": 294,
+   "found": 292,
    "shown": 3,
    "note": ""
   },
@@ -72,21 +72,21 @@
   {
    "name": "Kamernet",
    "ok": true,
-   "found": 106,
+   "found": 103,
    "shown": 0,
    "note": ""
   },
   {
    "name": "NMG Wonen",
    "ok": true,
-   "found": 23,
+   "found": 21,
    "shown": 0,
    "note": ""
   },
   {
    "name": "VB&T",
    "ok": true,
-   "found": 44,
+   "found": 40,
    "shown": 5,
    "note": ""
   },
@@ -107,8 +107,8 @@
   {
    "name": "Van der Linden",
    "ok": true,
-   "found": 136,
-   "shown": 11,
+   "found": 138,
+   "shown": 13,
    "note": ""
   }
  ],
@@ -143,6 +143,75 @@
   }
  ],
  "listings": [
+  {
+   "source": "Van der Linden",
+   "kind": "rent",
+   "url": "https://www.vanderlinden.nl/huurwoning/Bottelarijstraat-249-Amsterdam/2581/",
+   "address": "Bottelarijstraat 249, Amsterdam",
+   "city": "Amsterdam",
+   "m2": 73,
+   "bedrooms": 1,
+   "bedrooms_estimated": true,
+   "postcode": "1019",
+   "posted": null,
+   "title": "",
+   "type_text": "",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1576,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Bottelarijstraat 249 Amsterdam te huur - Makelaardij Van der Linden | Bottelarijstraat 249 | ad text: tweekamerappartement",
+   "service_costs": 125,
+   "home_key": "rent:1019:bottelarijstraat249",
+   "type": "Apartment",
+   "price": 1701,
+   "area": "Oost",
+   "neighbourhood": "Oostelijk Havengebied",
+   "favourite": false,
+   "rental_period": "Minimum 12 months",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Registration: ask",
+    "Bedrooms worked out from rooms",
+    "Includes €125 service costs"
+   ]
+  },
+  {
+   "source": "Van der Linden",
+   "kind": "rent",
+   "url": "https://www.vanderlinden.nl/huurwoning/Cruquiusweg-102-Amsterdam/2711/",
+   "address": "Cruquiusweg 102-D1, Amsterdam",
+   "city": "Amsterdam",
+   "m2": 67,
+   "bedrooms": 1,
+   "bedrooms_estimated": false,
+   "postcode": "1019",
+   "posted": null,
+   "title": "",
+   "type_text": "",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1314,
+   "first_seen": "2026-11-12",
+   "failed_checks": 0,
+   "type_source": "Cruquiusweg 102D1 Amsterdam te huur - Makelaardij Van der Linden | Cruquiusweg 102D1 | ad text: appartement",
+   "service_costs": 85,
+   "home_key": "rent:1019:cruquiusweg102d1",
+   "type": "Apartment",
+   "price": 1399,
+   "area": "Oost",
+   "neighbourhood": "Oostelijk Havengebied",
+   "favourite": false,
+   "rental_period": "Minimum 12 months",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Registration: ask",
+    "Includes €85 service costs"
+   ]
+  },
   {
    "source": "Van der Linden",
    "kind": "buy",
@@ -787,40 +856,6 @@
    "registration": "allowed",
    "tags": [
     "Registration allowed"
-   ]
-  },
-  {
-   "source": "Rentola",
-   "kind": "rent",
-   "url": "https://rentola.nl/listings/portiekwoning-in-amsterdam-pafe8c3",
-   "address": "Insulindeweg 442, 1094 MH Amsterdam",
-   "city": "Amsterdam",
-   "m2": 50,
-   "bedrooms": 2,
-   "bedrooms_estimated": false,
-   "postcode": "1094",
-   "posted": "2026-11-05",
-   "title": "Portiekwoning in Amsterdam",
-   "type_text": "House",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 713,
-   "first_seen": "2026-11-11",
-   "failed_checks": 0,
-   "type_source": "Portiekwoning in Amsterdam | House | Huis (50.0 m²) te huur in Amsterdam (Insulindeweg 442, 1094 MH Amsterdam, Netherlands) - rentola.nl | 2-slaapkamer huis van 50 m² in Amsterdam | huis Grootte",
-   "service_costs": 0,
-   "type": "Apartment",
-   "price": 713,
-   "area": "Oost",
-   "neighbourhood": "Indische Buurt",
-   "favourite": false,
-   "home_key": "rent:1094:insulindeweg442",
-   "rental_period": "Indefinite",
-   "fixed_term_months": null,
-   "registration": "not stated",
-   "tags": [
-    "Check carefully",
-    "Registration: ask"
    ]
   },
   {
