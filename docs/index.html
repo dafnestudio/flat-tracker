@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Amsterdam flat tracker</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <h1>Amsterdam flat tracker</h1>
+      <p class="updated" id="updated">Loading…</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Rent / Buy tabs -->
+    <div class="tabs" role="tablist">
+      <button role="tab" class="tab" data-kind="rent" aria-selected="true">Rent <span id="count-rent"></span></button>
+      <button role="tab" class="tab" data-kind="buy" aria-selected="false">Buy <span id="count-buy"></span></button>
+    </div>
+
+    <!-- Filters -->
+    <section class="filters" aria-label="Filters">
+      <div class="chips" id="areas" aria-label="Area"></div>
+      <div class="row">
+        <label>Max price
+          <input type="number" id="max-price" inputmode="numeric" min="0" step="50" placeholder="Any">
+        </label>
+        <label>Min size (m²)
+          <input type="number" id="min-size" inputmode="numeric" min="0" step="5" placeholder="Any">
+        </label>
+        <label>Bedrooms
+          <select id="bedrooms">
+            <option value="">Any</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+        </label>
+        <label>Sort by
+          <select id="sort">
+            <option value="newest">Newest</option>
+            <option value="price">Price, lowest first</option>
+            <option value="per-m2">€ per m², lowest first</option>
+          </select>
+        </label>
+        <label>Show
+          <select id="show">
+            <option value="open">All except passes</option>
+            <option value="new">New today</option>
+            <option value="saved">Saved</option>
+            <option value="contacted">Contacted</option>
+            <option value="viewing">Viewing</option>
+            <option value="pass">Passes</option>
+            <option value="all">Everything</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <p class="summary" id="summary"></p>
+    <div class="list" id="list"></div>
+
+    <!-- Which sources worked on the last run -->
+    <details class="sources">
+      <summary>Sources on the last run <span id="sources-short"></span></summary>
+      <table>
+        <thead><tr><th>Source</th><th>Status</th><th>Read</th><th>Shown</th></tr></thead>
+        <tbody id="sources"></tbody>
+      </table>
+      <h3>Not covered</h3>
+      <ul id="not-included"></ul>
+    </details>
+
+    <footer>
+      <p>A personal tracker. Always check an ad yourself and never pay before a viewing.
+         Your Saved / Contacted / Viewing / Pass marks are stored in this browser only.</p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

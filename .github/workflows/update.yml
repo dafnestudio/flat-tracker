@@ -1,0 +1,87 @@
+# The daily robot. It collects listings, saves them, and republishes the site.
+#
+# Run it by hand: GitHub -> Actions tab -> "Update listings" -> "Run workflow".
+
+name: Update listings
+
+on:
+  schedule:
+    # GitHub's clock is UTC and ignores summer time, so there are two
+    # alarms. The "Is it 07:30 in Amsterdam?" step below lets only the
+    # right one through.
+    - cron: "30 5 * * *"   # 07:30 in Amsterdam during summer time
+    - cron: "30 6 * * *"   # 07:30 in Amsterdam during winter time
+  workflow_dispatch:        # adds the "Run workflow" button
+  push:
+    branches: [main]
+    paths: ["docs/**"]      # republish when the website itself is edited
+
+permissions:
+  contents: write           # to save the updated listings file
+  pages: write              # to publish the website
+  id-token: write
+
+concurrency:
+  group: update-listings
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publish.outputs.page_url }}
+    steps:
+      - name: Is it 07:30 in Amsterdam?
+        id: clock
+        run: |
+          offset=$(TZ=Europe/Amsterdam date +%z)   # +0200 in summer, +0100 in winter
+          go=yes
+          if [ "${{ github.event.schedule }}" = "30 5 * * *" ] && [ "$offset" != "+0200" ]; then go=no; fi
+          if [ "${{ github.event.schedule }}" = "30 6 * * *" ] && [ "$offset" != "+0100" ]; then go=no; fi
+          echo "go=$go" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        if: steps.clock.outputs.go == 'yes'
+
+      - uses: actions/setup-python@v5
+        if: steps.clock.outputs.go == 'yes'
+        with:
+          python-version: "3.12"
+
+      - name: Install the two helper libraries
+        if: steps.clock.outputs.go == 'yes'
+        run: pip install -r requirements.txt
+
+      - name: Collect listings
+        # Skipped when only the website files were edited.
+        if: steps.clock.outputs.go == 'yes' && github.event_name != 'push'
+        run: python scraper/run.py
+
+      - name: Check every listing against the rules
+        # Runs the automated tests. If any listing on the site would break
+        # a rule in config.py, the run stops here and nothing is published.
+        if: steps.clock.outputs.go == 'yes'
+        run: python -m unittest discover -s scraper -v
+
+      - name: Save the updated listings
+        if: steps.clock.outputs.go == 'yes' && github.event_name != 'push'
+        run: |
+          git config user.name "flat-tracker robot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/data/listings.json
+          git diff --cached --quiet || git commit -m "Daily update of listings"
+          git push
+
+      - uses: actions/configure-pages@v5
+        if: steps.clock.outputs.go == 'yes'
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.clock.outputs.go == 'yes'
+        with:
+          path: docs
+
+      - name: Publish the website
+        if: steps.clock.outputs.go == 'yes'
+        id: publish
+        uses: actions/deploy-pages@v4
