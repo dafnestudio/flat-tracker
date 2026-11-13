@@ -1467,8 +1467,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-13T08:03:46Z",
+ "last_attempt": "2026-11-13T08:18:15Z",
  "last_attempt_ok": true,
- "last_attempt_note": "12 of 16 sources worked.",
- "updated": "2026-11-13T08:03:46Z"
+ "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
+ "updated": "2026-11-13T08:18:15Z"
 }
