@@ -78,6 +78,9 @@ def _robots_for(url):
                 _robots[host] = everything_off   # no access to the rules = no access
             elif reply.status_code >= 400:
                 _robots[host] = {"rules": [], "delay": None}  # no rules published
+            elif reply.text.lstrip()[:15].lower().startswith(("<!doctype", "<html")):
+                # A web page instead of robots.txt is a bot-check: stay out.
+                _robots[host] = everything_off
             else:
                 _robots[host] = _parse_robots(reply.text)
         except requests.RequestException:

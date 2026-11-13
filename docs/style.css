@@ -46,6 +46,11 @@ body {
 h1 { font-size: 1.45rem; margin: 0; letter-spacing: -0.01em; }
 .updated { margin: 2px 0 0; color: var(--muted); font-size: 0.92rem; }
 .updated.stale { color: var(--warn-text); }
+.warning {
+  margin: 8px 0 0; padding: 10px 12px; border-radius: 10px; font-weight: 600;
+  background: var(--warn-bg); color: var(--warn-text); border: 1px solid var(--warn-text);
+}
+.setup { color: var(--muted); font-weight: 600; }
 
 /* ---------- tabs ---------- */
 .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 12px; }

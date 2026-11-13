@@ -9,25 +9,39 @@ To switch one off: put a # in front of its line.
 """
 
 ACTIVE = [
-    "rentola",
+    # agencies and landlords, read from their own websites
     "ikwilhuren",
-    "housinganywhere",
-    "kamernet",
-    "nmg",
+    "vanderlinden",
     "vbt",
+    "nmg",
     "fris",
     "rotsvast",
-    "vanderlinden",
+    "w123",
+    "amsterdamrentals",
+    "jlg",
+    "heimstaden",
+    # platforms
+    "kamernet",
+    "housinganywhere",
+    # read from the alert emails they send you (never visited to search)
+    "funda",
+    "pararius",
+    "huurwoningen",
+    "hausing",
 ]
 
-# Sources that were asked for but cannot be read by a well-behaved robot.
+# Sources that were looked at and left out, with the reason.
 # Shown on the website so it is clear they are not covered.
 NOT_INCLUDED = [
-    ("Funda", "Blocks automated visits (bot-check page)."),
-    ("Pararius", "Blocks automated visits; no permitted route found."),
-    ("Huurwoningen.nl", "Refuses automated visits (HTTP 403)."),
-    ("Hausing", "Its robots.txt bars AI agents, so no module was built."),
+    ("Rentola", "Removed: reposts other sites' ads and charges to see contact details."),
     ("Vesteda", "Listings load only through an internal search service."),
+    ("Wonen bij Bouwinvest", "Listings are loaded by script, not present in the page."),
+    ("Domica", "Listings are loaded by script, not present in the page."),
+    ("Interhouse", "Listings load through an admin address its robots.txt closes."),
     ("Haas Housing", "Listings are loaded by script, not present in the page."),
+    ("Expat Rentals", "Its robots.txt bars AI agents, so no module was built."),
+    ("Holland2Stay", "Refuses automated visits (HTTP 403)."),
+    ("REBO", "Refuses automated visits (bot check)."),
+    ("Perfect Housing", "The site served looks like an archived copy; not reliable."),
     ("Huislijn", "Refuses automated visits (HTTP 403)."),
 ]

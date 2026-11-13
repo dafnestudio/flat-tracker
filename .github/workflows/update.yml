@@ -1,4 +1,4 @@
-# The daily robot. It collects listings, saves them, and republishes the site.
+# The robot. It collects listings, saves them, and republishes the site.
 #
 # Run it by hand: GitHub -> Actions tab -> "Update listings" -> "Run workflow".
 
@@ -6,19 +6,22 @@ name: Update listings
 
 on:
   schedule:
-    # GitHub's clock is UTC and ignores summer time, so there are two
-    # alarms. The "Is it 07:30 in Amsterdam?" step below lets only the
-    # right one through.
-    - cron: "30 5 * * *"   # 07:30 in Amsterdam during summer time
-    - cron: "30 6 * * *"   # 07:30 in Amsterdam during winter time
-  workflow_dispatch:        # adds the "Run workflow" button
-  push:
+    # Three times a day. GitHub's clock is UTC and ignores summer time:
+    #   winter: 07:17, 13:17 and 19:17 in Amsterdam
+    #   summer: 08:17, 14:17 and 20:17 in Amsterdam
+    # The odd minute is on purpose: GitHub often delays or skips runs
+    # planned exactly on the hour or half hour.
+    - cron: "17 6 * * *"
+    - cron: "17 12 * * *"
+    - cron: "17 18 * * *"
+  workflow_dispatch:          # adds the "Run workflow" button
+  push:                       # any change to the code or site also runs it
     branches: [main]
-    paths: ["docs/**"]      # republish when the website itself is edited
+    paths-ignore: ["docs/data/**", "README.md"]
 
 permissions:
-  contents: write           # to save the updated listings file
-  pages: write              # to publish the website
+  contents: write             # to save the updated listings file
+  pages: write                # to publish the website
   id-token: write
 
 concurrency:
@@ -28,60 +31,61 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     environment:
       name: github-pages
       url: ${{ steps.publish.outputs.page_url }}
     steps:
-      - name: Is it 07:30 in Amsterdam?
-        id: clock
-        run: |
-          offset=$(TZ=Europe/Amsterdam date +%z)   # +0200 in summer, +0100 in winter
-          go=yes
-          if [ "${{ github.event.schedule }}" = "30 5 * * *" ] && [ "$offset" != "+0200" ]; then go=no; fi
-          if [ "${{ github.event.schedule }}" = "30 6 * * *" ] && [ "$offset" != "+0100" ]; then go=no; fi
-          echo "go=$go" >> "$GITHUB_OUTPUT"
-
       - uses: actions/checkout@v4
-        if: steps.clock.outputs.go == 'yes'
 
       - uses: actions/setup-python@v5
-        if: steps.clock.outputs.go == 'yes'
         with:
           python-version: "3.12"
 
       - name: Install the two helper libraries
-        if: steps.clock.outputs.go == 'yes'
         run: pip install -r requirements.txt
 
+      # A problem in the next two steps never stops the update: the site
+      # is still saved and published, and the run is marked red at the
+      # very end so that GitHub emails you.
       - name: Collect listings
-        # Skipped when only the website files were edited.
-        if: steps.clock.outputs.go == 'yes' && github.event_name != 'push'
+        id: collect
+        continue-on-error: true
+        env:
+          # Your Gmail details for reading alert emails. They live in
+          # Settings -> Secrets and variables -> Actions, never in the code.
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
         run: python scraper/run.py
 
-      - name: Check every listing against the rules
-        # Runs the automated tests. If any listing on the site would break
-        # a rule in config.py, the run stops here and nothing is published.
-        if: steps.clock.outputs.go == 'yes'
+      - name: Check the rules (automated tests)
+        id: tests
+        continue-on-error: true
         run: python -m unittest discover -s scraper -v
 
       - name: Save the updated listings
-        if: steps.clock.outputs.go == 'yes' && github.event_name != 'push'
         run: |
           git config user.name "flat-tracker robot"
           git config user.email "actions@users.noreply.github.com"
           git add docs/data/listings.json
-          git diff --cached --quiet || git commit -m "Daily update of listings"
-          git push
+          git diff --cached --quiet || git commit -m "Update listings"
+          git pull --rebase --autostash || true
+          git push || echo "Could not save to the repository this time; the site is still published."
 
       - uses: actions/configure-pages@v5
-        if: steps.clock.outputs.go == 'yes'
 
       - uses: actions/upload-pages-artifact@v3
-        if: steps.clock.outputs.go == 'yes'
         with:
           path: docs
 
       - name: Publish the website
-        if: steps.clock.outputs.go == 'yes'
         id: publish
         uses: actions/deploy-pages@v4
+
+      - name: Report problems (this is what triggers the email)
+        if: steps.collect.outcome == 'failure' || steps.tests.outcome == 'failure'
+        run: |
+          echo "Collect listings: ${{ steps.collect.outcome }}"
+          echo "Automated tests:  ${{ steps.tests.outcome }}"
+          echo "The website was still published. Open the red step above to see what went wrong."
+          exit 1

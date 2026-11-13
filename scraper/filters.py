@@ -22,6 +22,9 @@ A listing is a dictionary with:
     m2          living area
     bedrooms    number of bedrooms, or None
     start_date, end_date   availability dates, if the source gives them
+    details_may_be_missing   True only for email-alert listings whose ad
+                page may not be opened: size and bedrooms may then be
+                unknown (the listing is tagged), never the postcode
 """
 
 import re
@@ -72,8 +75,10 @@ def home_type(title, type_text="", text=""):
     shared, something that is not a home, or anything unclear.
     """
     headline = "%s | %s" % (title or "", type_text or "")
-    found = _ROOM_TITLE.search(headline)
-    if found:
+    for found in _ROOM_TITLE.finditer(headline):
+        # "3 kamer(s)" is a room count, not a room for rent.
+        if headline[found.end():found.end() + 3] == "(s)":
+            continue
         return None, "room, studio or shared ('%s' in the title)" % found.group(1).lower()
     for found in _NOT_HOME_TITLE.finditer(headline):
         if not _COMES_WITH.search(headline[:found.start()]):
@@ -173,13 +178,16 @@ def check(listing, today=None):
     # which of the two rent tabs a listing belongs in.)
     if price > (RENT_STRETCH_MAX_PRICE if renting else rule["max_price"]):
         return False, "too expensive (%d)" % price
+    lenient = bool(listing.get("details_may_be_missing"))
     if not listing.get("m2"):
-        return False, "no size"
-    if listing["m2"] < rule["min_m2"]:
+        if not lenient:
+            return False, "no size"
+    elif listing["m2"] < rule["min_m2"]:
         return False, "too small (%d m2)" % listing["m2"]
     if listing.get("bedrooms") is None:
-        return False, "no bedroom count"
-    if listing["bedrooms"] not in rule["bedrooms"]:
+        if not lenient:
+            return False, "no bedroom count"
+    elif listing["bedrooms"] not in rule["bedrooms"]:
         return False, "%d bedrooms" % listing["bedrooms"]
     return True, ""
 

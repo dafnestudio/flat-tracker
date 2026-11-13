@@ -1,5 +1,4 @@
 {
- "updated": "2026-11-12T15:58:14Z",
  "filters": {
   "rent": {
    "max_price": 1800,
@@ -50,93 +49,174 @@
  },
  "sources": [
   {
-   "name": "Rentola",
-   "ok": true,
-   "found": 469,
-   "shown": 7,
-   "note": ""
-  },
-  {
    "name": "ikwilhuren.nu (MVGM)",
    "ok": true,
-   "found": 292,
+   "state": "ok",
+   "found": 282,
    "shown": 11,
    "note": ""
   },
   {
-   "name": "HousingAnywhere",
+   "name": "Van der Linden",
    "ok": true,
-   "found": 6,
+   "state": "ok",
+   "found": 143,
+   "shown": 18,
+   "note": ""
+  },
+  {
+   "name": "VB&T",
+   "ok": true,
+   "state": "ok",
+   "found": 44,
+   "shown": 7,
+   "note": ""
+  },
+  {
+   "name": "NMG Wonen",
+   "ok": true,
+   "state": "ok",
+   "found": 21,
+   "shown": 0,
+   "note": ""
+  },
+  {
+   "name": "Fris",
+   "ok": true,
+   "state": "ok",
+   "found": 45,
+   "shown": 0,
+   "note": ""
+  },
+  {
+   "name": "Rotsvast",
+   "ok": true,
+   "state": "ok",
+   "found": 0,
+   "shown": 0,
+   "note": "Nothing found in Amsterdam today. If this stays at 0 for days, the site's layout may have changed."
+  },
+  {
+   "name": "123Wonen",
+   "ok": true,
+   "state": "ok",
+   "found": 46,
+   "shown": 0,
+   "note": ""
+  },
+  {
+   "name": "Amsterdam Rentals",
+   "ok": true,
+   "state": "ok",
+   "found": 8,
+   "shown": 0,
+   "note": ""
+  },
+  {
+   "name": "JLG Real Estate",
+   "ok": true,
+   "state": "ok",
+   "found": 51,
+   "shown": 0,
+   "note": ""
+  },
+  {
+   "name": "Heimstaden",
+   "ok": true,
+   "state": "ok",
+   "found": 1,
    "shown": 0,
    "note": ""
   },
   {
    "name": "Kamernet",
    "ok": true,
-   "found": 103,
+   "state": "ok",
+   "found": 100,
    "shown": 0,
    "note": ""
   },
   {
-   "name": "NMG Wonen",
+   "name": "HousingAnywhere",
    "ok": true,
-   "found": 21,
+   "state": "ok",
+   "found": 6,
    "shown": 0,
    "note": ""
   },
   {
-   "name": "VB&T",
-   "ok": true,
-   "found": 40,
-   "shown": 6,
-   "note": ""
-  },
-  {
-   "name": "Fris",
-   "ok": true,
-   "found": 45,
-   "shown": 1,
-   "note": ""
-  },
-  {
-   "name": "Rotsvast",
+   "name": "Funda",
    "ok": false,
+   "state": "setup",
    "found": 0,
    "shown": 0,
-   "note": "Blocked: robots.txt does not allow https://www.rotsvast.nl/wonen/"
+   "note": "Not set up yet: needs the email alert and the Gmail secrets."
   },
   {
-   "name": "Van der Linden",
-   "ok": true,
-   "found": 139,
-   "shown": 16,
-   "note": ""
+   "name": "Pararius",
+   "ok": false,
+   "state": "setup",
+   "found": 0,
+   "shown": 0,
+   "note": "Not set up yet: needs the email alert and the Gmail secrets."
+  },
+  {
+   "name": "Huurwoningen.nl",
+   "ok": false,
+   "state": "setup",
+   "found": 0,
+   "shown": 0,
+   "note": "Not set up yet: needs the email alert and the Gmail secrets."
+  },
+  {
+   "name": "Hausing",
+   "ok": false,
+   "state": "setup",
+   "found": 0,
+   "shown": 0,
+   "note": "Not set up yet: needs the email alert and the Gmail secrets."
   }
  ],
  "not_included": [
   {
-   "name": "Funda",
-   "note": "Blocks automated visits (bot-check page)."
-  },
-  {
-   "name": "Pararius",
-   "note": "Blocks automated visits; no permitted route found."
-  },
-  {
-   "name": "Huurwoningen.nl",
-   "note": "Refuses automated visits (HTTP 403)."
-  },
-  {
-   "name": "Hausing",
-   "note": "Its robots.txt bars AI agents, so no module was built."
+   "name": "Rentola",
+   "note": "Removed: reposts other sites' ads and charges to see contact details."
   },
   {
    "name": "Vesteda",
    "note": "Listings load only through an internal search service."
   },
   {
+   "name": "Wonen bij Bouwinvest",
+   "note": "Listings are loaded by script, not present in the page."
+  },
+  {
+   "name": "Domica",
+   "note": "Listings are loaded by script, not present in the page."
+  },
+  {
+   "name": "Interhouse",
+   "note": "Listings load through an admin address its robots.txt closes."
+  },
+  {
    "name": "Haas Housing",
    "note": "Listings are loaded by script, not present in the page."
+  },
+  {
+   "name": "Expat Rentals",
+   "note": "Its robots.txt bars AI agents, so no module was built."
+  },
+  {
+   "name": "Holland2Stay",
+   "note": "Refuses automated visits (HTTP 403)."
+  },
+  {
+   "name": "REBO",
+   "note": "Refuses automated visits (bot check)."
+  },
+  {
+   "name": "Perfect Housing",
+   "note": "The site served looks like an archived copy; not reliable."
   },
   {
    "name": "Huislijn",
@@ -144,6 +224,115 @@
   }
  ],
  "listings": [
+  {
+   "source": "Van der Linden",
+   "kind": "rent",
+   "url": "https://www.vanderlinden.nl/huurwoning/Cruquiusweg-102-Amsterdam/2716/",
+   "address": "Cruquiusweg 102-C3, Amsterdam",
+   "city": "Amsterdam",
+   "m2": 67,
+   "bedrooms": 1,
+   "bedrooms_estimated": false,
+   "postcode": "1019",
+   "posted": null,
+   "title": "",
+   "type_text": "",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1314,
+   "first_seen": "2026-11-13",
+   "failed_checks": 0,
+   "type_source": "Cruquiusweg 102C3 Amsterdam te huur - Makelaardij Van der Linden | Cruquiusweg 102C3 | ad text: appartement",
+   "service_costs": 85,
+   "home_key": "rent:1019:cruquiusweg102c3",
+   "tab": "rent",
+   "type": "Apartment",
+   "price": 1399,
+   "area": "Oost",
+   "neighbourhood": "Oostelijk Havengebied",
+   "favourite": false,
+   "rental_period": "Minimum 12 months",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Registration: ask",
+    "Includes €85 service costs"
+   ]
+  },
+  {
+   "source": "Van der Linden",
+   "kind": "rent",
+   "url": "https://www.vanderlinden.nl/huurwoning/Cruquiusweg-95-Amsterdam/2717/",
+   "address": "Cruquiusweg 95-A, Amsterdam",
+   "city": "Amsterdam",
+   "m2": 85,
+   "bedrooms": 1,
+   "bedrooms_estimated": true,
+   "postcode": "1019",
+   "posted": null,
+   "title": "",
+   "type_text": "",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 933,
+   "first_seen": "2026-11-13",
+   "failed_checks": 0,
+   "type_source": "Cruquiusweg 95A Amsterdam te huur - Makelaardij Van der Linden | Cruquiusweg 95A | ad text: tweekamerappartement",
+   "service_costs": 75,
+   "home_key": "rent:1019:cruquiusweg95a",
+   "tab": "rent",
+   "type": "Apartment",
+   "price": 1008,
+   "area": "Oost",
+   "neighbourhood": "Oostelijk Havengebied",
+   "favourite": false,
+   "rental_period": "Not stated",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Check rental period",
+    "Check carefully",
+    "Registration: ask",
+    "Bedrooms worked out from rooms",
+    "Includes €75 service costs"
+   ]
+  },
+  {
+   "source": "VB&T",
+   "kind": "rent",
+   "url": "https://vbtverhuurmakelaars.nl/woning/amsterdam-ceramiquelaan-489",
+   "address": "Ceramiquelaan 489, Amsterdam",
+   "city": "Amsterdam",
+   "m2": 84,
+   "bedrooms": 2,
+   "bedrooms_estimated": true,
+   "postcode": "1031",
+   "posted": null,
+   "title": "",
+   "type_text": "Appartement",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1910,
+   "first_seen": "2026-11-13",
+   "failed_checks": 0,
+   "type_source": "Appartement | Appartement Ceramiquelaan 489 Amsterdam Te Huur | vb&t Verhuurmakelaars | Ceramiquelaan 489 | Appartement Soort bouw Bestaande bouw Bouwjaa",
+   "service_costs": 85,
+   "home_key": "rent:1031:ceramiquelaan489",
+   "tab": "rent_stretch",
+   "type": "Apartment",
+   "price": 1995,
+   "area": "Noord",
+   "neighbourhood": "Overhoeks / Van der Pek / Buiksloterham",
+   "favourite": false,
+   "rental_period": "Minimum 12 months",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Registration: ask",
+    "Bedrooms worked out from rooms",
+    "Includes €85 service costs"
+   ]
+  },
   {
    "source": "Van der Linden",
    "kind": "rent",
@@ -317,41 +506,6 @@
    "registration": "not stated",
    "tags": [
     "Fixed term: 12 months",
-    "Registration: ask"
-   ]
-  },
-  {
-   "source": "Fris",
-   "kind": "rent",
-   "url": "https://fris.nl/volledige-woningaanbod/elzenhagensingel-262-amsterdam/",
-   "address": "Elzenhagensingel 262 1022 LA Amsterdam",
-   "city": "Amsterdam",
-   "m2": 72,
-   "bedrooms": 2,
-   "bedrooms_estimated": false,
-   "postcode": "1022",
-   "posted": null,
-   "title": "",
-   "type_text": "",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 1959,
-   "first_seen": "2026-11-12",
-   "failed_checks": 0,
-   "type_source": "Elzenhagensingel 262 - Amsterdam - Fris Real People | Elzenhagensingel 262 – Amsterdam | ad text: tweekamerappartement",
-   "service_costs": 0,
-   "home_key": "rent:1022:elzenhagensingel262",
-   "tab": "rent_stretch",
-   "type": "Apartment",
-   "price": 1959,
-   "area": "Noord",
-   "neighbourhood": "Nieuwendammerham",
-   "favourite": false,
-   "rental_period": "Not stated",
-   "fixed_term_months": null,
-   "registration": "not stated",
-   "tags": [
-    "Check rental period",
     "Registration: ask"
    ]
   },
@@ -680,142 +834,6 @@
    ]
   },
   {
-   "source": "Rentola",
-   "kind": "rent",
-   "url": "https://rentola.nl/listings/appartement-te-huur-p7a0436",
-   "address": "Weesperstraat 346, 1018 DN Amsterdam",
-   "city": "Amsterdam",
-   "m2": 72,
-   "bedrooms": 2,
-   "bedrooms_estimated": false,
-   "postcode": "1018",
-   "posted": "2026-11-07",
-   "title": "Appartement te huur",
-   "type_text": "Apartment",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 2000,
-   "first_seen": "2026-11-12",
-   "failed_checks": 0,
-   "type_source": "Appartement te huur | Apartment | Appartement (72.0 m²) te huur in Amsterdam (Weesperstraat 346, 1018 DN Amsterdam, Netherlands) - rentola.nl | 2-slaapkamer appartement van 72 m² in Amsterdam | appartement Grootte",
-   "service_costs": 0,
-   "home_key": "rent:1018:weesperstraat346",
-   "tab": "rent_stretch",
-   "type": "Apartment",
-   "price": 2000,
-   "area": "Oost",
-   "neighbourhood": "Plantage / Oostelijke Eilanden",
-   "favourite": false,
-   "rental_period": "Indefinite",
-   "fixed_term_months": null,
-   "registration": "not stated",
-   "tags": [
-    "Registration: ask"
-   ]
-  },
-  {
-   "source": "Rentola",
-   "kind": "rent",
-   "url": "https://rentola.nl/listings/appartement-te-huur-pe47d94",
-   "address": "Mercatorplein, Mercatorplein 16-3, 1057 CB Amsterdam",
-   "city": "Amsterdam",
-   "m2": 56,
-   "bedrooms": 1,
-   "bedrooms_estimated": false,
-   "postcode": "1057",
-   "posted": "2026-11-03",
-   "title": "Appartement te huur",
-   "type_text": "Apartment",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 2000,
-   "first_seen": "2026-11-12",
-   "failed_checks": 0,
-   "type_source": "Appartement te huur | Apartment | Appartement (56.0 m²) te huur in Amsterdam (Mercatorplein, Mercatorplein 16-3, 1057 CB Amsterdam, Netherlands) - rentola.nl | 1-slaapkamer appartement van 56 m² in Amsterdam | Gemiddelde maandelijkse huur Appartement €",
-   "service_costs": 0,
-   "home_key": "rent:1057:mercatorpleinmercatorplein163",
-   "tab": "rent_stretch",
-   "type": "Apartment",
-   "price": 2000,
-   "area": "West",
-   "neighbourhood": "De Baarsjes",
-   "favourite": false,
-   "rental_period": "Indefinite",
-   "fixed_term_months": null,
-   "registration": "not stated",
-   "tags": [
-    "Registration: ask"
-   ]
-  },
-  {
-   "source": "Rentola",
-   "kind": "rent",
-   "url": "https://rentola.nl/listings/te-huur-appartement-mercatorplein-16-1-in-amsterdam-p1beb77",
-   "address": "Mercatorplein, Mercatorplein 16-1, 1057 CB Amsterdam",
-   "city": "Amsterdam",
-   "m2": 56,
-   "bedrooms": 2,
-   "bedrooms_estimated": false,
-   "postcode": "1057",
-   "posted": "2026-11-04",
-   "title": "Te huur: Appartement Mercatorplein 16 1 in Amsterdam",
-   "type_text": "Apartment",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 2000,
-   "first_seen": "2026-11-12",
-   "failed_checks": 0,
-   "type_source": "Te huur: Appartement Mercatorplein 16 1 in Amsterdam | Apartment | Appartement (56.0 m²) te huur in Amsterdam (Mercatorplein, Mercatorplein 16-1, 1057 CB Amsterdam, Netherlands) - rentola.nl | 2-slaapkamer appartement van 56 m² in Amsterdam | Gemiddelde maandelijkse huur Appartement €",
-   "service_costs": 0,
-   "home_key": "rent:1057:mercatorpleinmercatorplein161",
-   "tab": "rent_stretch",
-   "type": "Apartment",
-   "price": 2000,
-   "area": "West",
-   "neighbourhood": "De Baarsjes",
-   "favourite": false,
-   "rental_period": "Indefinite",
-   "fixed_term_months": null,
-   "registration": "not stated",
-   "tags": [
-    "Registration: ask"
-   ]
-  },
-  {
-   "source": "Rentola",
-   "kind": "rent",
-   "url": "https://rentola.nl/listings/house-at-rijtuigenhof-1054nb-amsterdam-netherlands-p42b84b",
-   "address": "Rijtuigenhof, 1054 NC Amsterdam",
-   "city": "Amsterdam",
-   "m2": 60,
-   "bedrooms": 2,
-   "bedrooms_estimated": false,
-   "postcode": "1054",
-   "posted": "2026-11-07",
-   "title": "house at Rijtuigenhof, 1054NB Amsterdam, Netherlands",
-   "type_text": "House",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 1850,
-   "first_seen": "2026-11-12",
-   "failed_checks": 0,
-   "type_source": "house at Rijtuigenhof, 1054NB Amsterdam, Netherlands | House | Huis (60.0 m²) te huur in Amsterdam (Rijtuigenhof, 1054 NC Amsterdam, Netherlands) - rentola.nl | 2-slaapkamer huis van 60 m² in Amsterdam | Gemiddelde maandelijkse huur Appartement €",
-   "service_costs": 0,
-   "home_key": null,
-   "tab": "rent_stretch",
-   "type": "House",
-   "price": 1850,
-   "area": "West",
-   "neighbourhood": "Oud-West / Overtoom",
-   "favourite": true,
-   "rental_period": "Indefinite",
-   "fixed_term_months": null,
-   "registration": "not stated",
-   "tags": [
-    "Registration: ask"
-   ]
-  },
-  {
    "source": "Van der Linden",
    "kind": "buy",
    "url": "https://www.vanderlinden.nl/koopwoning/Tugelaweg-139F-AMSTERDAM/2697/",
@@ -1022,10 +1040,10 @@
    "base_price": 1745,
    "first_seen": "2026-11-11",
    "failed_checks": 0,
-   "type_source": "Bottelarijstraat 311 Amsterdam te huur - Makelaardij Van der Linden | Bottelarijstraat 311 | ad text: appartement",
-   "service_costs": 0,
+   "type_source": "Bottelarijstraat 311 Amsterdam te huur - Makelaardij Van der Linden | Bottelarijstraat 311 | ad text: driekamerappartement",
+   "service_costs": 90,
    "type": "Apartment",
-   "price": 1745,
+   "price": 1835,
    "area": "Oost",
    "neighbourhood": "Oostelijk Havengebied",
    "favourite": false,
@@ -1035,9 +1053,10 @@
    "registration": "not stated",
    "tags": [
     "Fixed term: 12 months",
-    "Registration: ask"
+    "Registration: ask",
+    "Includes €90 service costs"
    ],
-   "tab": "rent"
+   "tab": "rent_stretch"
   },
   {
    "source": "Van der Linden",
@@ -1446,108 +1465,10 @@
     "Includes €80 service costs"
    ],
    "tab": "rent"
-  },
-  {
-   "source": "Rentola",
-   "kind": "rent",
-   "url": "https://rentola.nl/listings/te-huur-appartement-prinseneiland-527-in-amsterdam-pc43932",
-   "address": "Prinseneiland 527, 1013 EC Amsterdam",
-   "city": "Amsterdam",
-   "m2": 50,
-   "bedrooms": 2,
-   "bedrooms_estimated": false,
-   "postcode": "1013",
-   "posted": "2026-11-05",
-   "title": "Te huur: Appartement Prinseneiland 527 in Amsterdam",
-   "type_text": "Apartment",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 1670,
-   "first_seen": "2026-11-11",
-   "failed_checks": 0,
-   "type_source": "Te huur: Appartement Prinseneiland 527 in Amsterdam | Apartment | Appartement (50.0 m²) te huur in Amsterdam (Prinseneiland 527, 1013 EC Amsterdam, Netherlands) - rentola.nl | 2-slaapkamer appartement van 50 m² in Amsterdam | Gemiddelde maandelijkse huur Appartement €",
-   "service_costs": 0,
-   "type": "Apartment",
-   "price": 1670,
-   "area": "Centrum",
-   "neighbourhood": "Haarlemmerbuurt / Westelijke Eilanden",
-   "favourite": false,
-   "home_key": "rent:1013:prinseneiland527",
-   "rental_period": "Indefinite",
-   "fixed_term_months": null,
-   "registration": "allowed",
-   "tags": [
-    "Registration allowed"
-   ],
-   "tab": "rent"
-  },
-  {
-   "source": "Rentola",
-   "kind": "rent",
-   "url": "https://rentola.nl/listings/appartement-te-huur-p737996",
-   "address": "Olga de Haasstraat 285, 1095 PG Amsterdam",
-   "city": "Amsterdam",
-   "m2": 69,
-   "bedrooms": 2,
-   "bedrooms_estimated": false,
-   "postcode": "1095",
-   "posted": "2026-10-22",
-   "title": "Appartement te huur",
-   "type_text": "Apartment",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 1283,
-   "first_seen": "2026-11-11",
-   "failed_checks": 0,
-   "type_source": "Appartement te huur | Apartment | Appartement (69.0 m²) te huur in Amsterdam (Olga de Haasstraat 285, 1095 PG Amsterdam, Netherlands) - rentola.nl | 2-slaapkamer appartement van 69 m² in Amsterdam | appartement Grootte",
-   "service_costs": 0,
-   "type": "Apartment",
-   "price": 1283,
-   "area": "Oost",
-   "neighbourhood": "Indische Buurt / Zeeburgereiland",
-   "favourite": false,
-   "home_key": "rent:1095:olgadehaasstraat285",
-   "rental_period": "Indefinite",
-   "fixed_term_months": null,
-   "registration": "not stated",
-   "tags": [
-    "Registration: ask"
-   ],
-   "tab": "rent"
-  },
-  {
-   "source": "Rentola",
-   "kind": "rent",
-   "url": "https://rentola.nl/listings/appartement-te-huur-pf22eb2",
-   "address": "Haarlemmerweg 1156N, 1014 BL Amsterdam",
-   "city": "Amsterdam",
-   "m2": 50,
-   "bedrooms": 2,
-   "bedrooms_estimated": false,
-   "postcode": "1014",
-   "posted": "2026-10-28",
-   "title": "Appartement te huur",
-   "type_text": "Apartment",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 1143,
-   "first_seen": "2026-11-11",
-   "failed_checks": 0,
-   "type_source": "Appartement te huur | Apartment | Appartement (50.0 m²) te huur in Amsterdam (Haarlemmerweg 1156N, 1014 BL Amsterdam, Netherlands) - rentola.nl | 2-slaapkamer appartement van 50 m² in Amsterdam | Gemiddelde maandelijkse huur Appartement €",
-   "service_costs": 0,
-   "type": "Apartment",
-   "price": 1143,
-   "area": "Sloterdijk",
-   "neighbourhood": "Sloterdijk",
-   "favourite": false,
-   "home_key": "rent:1014:haarlemmerweg1156n",
-   "rental_period": "Indefinite",
-   "fixed_term_months": null,
-   "registration": "not stated",
-   "tags": [
-    "Registration: ask"
-   ],
-   "tab": "rent"
   }
- ]
+ ],
+ "last_attempt": "2026-11-13T08:03:46Z",
+ "last_attempt_ok": true,
+ "last_attempt_note": "12 of 16 sources worked.",
+ "updated": "2026-11-13T08:03:46Z"
 }

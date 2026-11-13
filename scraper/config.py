@@ -104,7 +104,8 @@ HOME_WORDS = {
 # (never for open platforms), an apartment or house word in the ad's own
 # text is accepted as the type.
 TYPE_FROM_AD_TEXT_SOURCES = {"Van der Linden", "NMG Wonen", "Fris", "Rotsvast",
-                             "VB&T", "ikwilhuren.nu (MVGM)"}
+                             "VB&T", "ikwilhuren.nu (MVGM)", "123Wonen",
+                             "Amsterdam Rentals", "JLG Real Estate", "Heimstaden"}
 
 # Rooms, studios, shared. Any of these in the TITLE or TYPE = dropped.
 # ("kamer" does not match "3 kamers" or "slaapkamer"; "room" does not
@@ -235,7 +236,7 @@ BUY_NOT_WANTED = {
 # 8. SCAM SIGNS
 # ===================================================================
 # Sites where anyone can place an ad. Agency websites are trusted more.
-OPEN_PLATFORMS = {"Rentola", "Kamernet", "HousingAnywhere"}
+OPEN_PLATFORMS = {"Kamernet", "HousingAnywhere"}
 
 # Any one of these = dropped.
 SCAM_SIGNS = {
@@ -288,7 +289,6 @@ TAG_REGISTRATION = {"allowed": "Registration allowed",
                     "not stated": "Registration: ask"}
 # Platforms where private people place ads themselves. An ad there that
 # uses none of the agency words below is tagged as a private landlord.
-# (Rentola is not listed: it re-publishes ads, mostly from agencies.)
 PRIVATE_AD_PLATFORMS = {"Kamernet", "HousingAnywhere"}
 AGENCY_WORDS = [
     r"makelaar\w*", r"makelaardij", r"vastgoed\w*", r"real estate", r"agency",
@@ -308,13 +308,60 @@ NO_DEPOSIT_WORDS = [r"geen borg", r"zonder borg", r"no deposit", r"without depos
 # as gone, reserved or a short let, copies of it elsewhere go too.
 SOURCE_PRIORITY = [
     "Van der Linden", "Fris", "NMG Wonen", "VB&T", "Rotsvast",
-    "ikwilhuren.nu (MVGM)",                    # agencies
-    "Funda", "Pararius",                       # (not readable at present)
-    "Kamernet", "HousingAnywhere", "Rentola",  # platforms and aggregators
+    "ikwilhuren.nu (MVGM)", "123Wonen", "Amsterdam Rentals",
+    "JLG Real Estate", "Heimstaden", "Hausing",      # agencies and landlords
+    "Funda", "Pararius", "Huurwoningen.nl",          # the big portals (email alerts)
+    "Kamernet", "HousingAnywhere",                   # open platforms
 ]
 
 # ===================================================================
-# 11. MANNERS (how the robot behaves on other people's websites)
+# 11. EMAIL ALERTS (Funda, Pararius, Huurwoningen.nl, Hausing)
+# ===================================================================
+# These sites do not allow robots, so they are never visited to search.
+# Instead the run reads the alert emails they send you (read-only: it
+# never deletes, sends or marks anything) and takes the ad links from
+# them. Your Gmail address and app password are NOT in this file: they
+# are stored as GitHub repository secrets.
+#
+#   senders:  the email comes from an address containing one of these
+#   ad_link:  what a direct link to one ad looks like on that site
+EMAIL_ALERTS = {
+    "Funda": {
+        "senders": ["funda.nl"],
+        "ad_link": r"https?://(?:www\.)?funda\.nl/(?:detail/)?(?:huur|koop)/[^\s\"'<>?#&]*\d{6,}[^\s\"'<>?#&]*",
+    },
+    "Pararius": {
+        "senders": ["pararius.nl", "pararius.com"],
+        "ad_link": r"https?://(?:www\.)?pararius\.(?:nl|com)/[a-z-]+-(?:te-huur|for-rent)/amsterdam/[0-9a-z]{6,}/[^\s\"'<>?#&]+",
+    },
+    "Huurwoningen.nl": {
+        "senders": ["huurwoningen.nl"],
+        "ad_link": r"https?://(?:www\.)?huurwoningen\.nl/(?:en/)?(?:huren|rent)/amsterdam/[0-9a-z]{6,}/[^\s\"'<>?#&]+",
+    },
+    "Hausing": {
+        "senders": ["hausing.com"],
+        "ad_link": r"https?://(?:www\.)?hausing\.com/(?:nl/)?(?:properties-for-rent|huurwoningen|property|rent)[a-z-]*/[^\s\"'<>?#&]{8,}",
+    },
+}
+EMAIL_LOOKBACK_DAYS = 14          # how far back alert emails are read
+# Alert emails wrap links in tracking addresses. To find the real ad
+# address the run asks the tracking address where it points (one request,
+# without visiting the ad site). Never done for unsubscribe or settings links.
+EMAIL_FOLLOW_TRACKING_LINKS = True
+EMAIL_NEVER_FOLLOW_WORDS = ["uitschrijven", "afmelden", "unsubscribe", "opzeggen",
+                            "voorkeuren", "preferences", "instellingen", "settings",
+                            "wijzig", "beheer", "manage", "verwijder", "delete",
+                            "pauzeer", "pause", "stop"]
+# If the email gives no size or bedroom count, the ad page is opened once,
+# but only if that site's robots.txt allows it. Otherwise the listing is
+# kept with this tag. (No postcode still means no listing.)
+TAG_CHECK_DETAILS = "Check details on the ad"
+# Ads on these sites cannot be re-checked for "let / sold", so a listing
+# from an alert email is removed this many days after it was first found.
+EMAIL_LISTING_MAX_AGE_DAYS = 14
+
+# ===================================================================
+# 12. MANNERS (how the robot behaves on other people's websites)
 # ===================================================================
 USER_AGENT = "personal-flat-tracker/1.0 (non-commercial; one visit per day)"
 DELAY_SECONDS = 2.0  # pause between two requests to the same website

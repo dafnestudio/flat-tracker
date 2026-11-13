@@ -164,33 +164,45 @@ function draw() {
     chip.setAttribute("aria-pressed", String(chip.textContent === state.area)));
 }
 
-function drawHeader() {
-  const line = $("updated");
-  if (!data.updated) { line.textContent = "Not updated yet."; return; }
-  const when = new Date(data.updated);
-  const text = when.toLocaleString("en-GB", {
+function when(isoTime) {
+  return new Date(isoTime).toLocaleString("en-GB", {
     timeZone: "Europe/Amsterdam", weekday: "short", day: "numeric", month: "short",
     hour: "2-digit", minute: "2-digit",
   });
-  const hours = (Date.now() - when.getTime()) / 3600000;
-  line.textContent = "Last updated: " + text + " (Amsterdam time)";
-  if (hours > 36) {   // the daily run has been missed
-    line.textContent += " — more than a day old, the daily update may have failed";
-    line.classList.add("stale");
+}
+
+function drawHeader() {
+  if (!data.updated) { $("updated").textContent = "Not updated yet."; return; }
+  $("updated").textContent = "Last successful update: " + when(data.updated) + " (Amsterdam time)";
+  if (data.last_attempt) {
+    $("attempt").textContent = "Last attempt: " + when(data.last_attempt) + " — " +
+      (data.last_attempt_ok ? "worked" : "did not work") +
+      (data.last_attempt_note ? ". " + data.last_attempt_note : "");
+  }
+  // Clear warning when the listings are more than a day old.
+  const hours = (Date.now() - new Date(data.updated).getTime()) / 3600000;
+  if (hours > 24) {
+    $("updated").classList.add("stale");
+    $("warning").hidden = false;
+    $("warning").textContent = "⚠ No successful update for " + Math.floor(hours) +
+      " hours. Listings below may be out of date. Check the Actions tab on GitHub.";
   }
 }
 
 function drawSources() {
-  const working = data.sources.filter((source) => source.ok).length;
-  $("sources-short").textContent = "— " + working + " of " + data.sources.length + " worked";
+  const stateOf = (source) => source.state || (source.ok ? "ok" : "failed");
+  const labels = { ok: ["ok", "✓ Worked"], failed: ["fail", "✗ Failed"], setup: ["setup", "○ Not set up"] };
+  const working = data.sources.filter((source) => stateOf(source) === "ok").length;
+  const waiting = data.sources.filter((source) => stateOf(source) === "setup").length;
+  $("sources-short").textContent = "— " + working + " of " + data.sources.length + " worked" +
+    (waiting ? ", " + waiting + " not set up yet" : "");
   $("sources").replaceChildren(...data.sources.map((source) => {
     const row = el("tr");
     const name = el("td", "", source.name);
     if (source.note) name.append(el("span", "note", source.note));
-    row.append(name,
-      el("td", source.ok ? "ok" : "fail", source.ok ? "✓ Worked" : "✗ Failed"),
-      el("td", "", String(source.found)),
-      el("td", "", String(source.shown)));
+    const [style, label] = labels[stateOf(source)];
+    row.append(name, el("td", style, label),
+      el("td", "", String(source.found)), el("td", "", String(source.shown)));
     return row;
   }));
   $("not-included").replaceChildren(...(data.not_included || []).map((source) =>

@@ -1,8 +1,8 @@
 # Amsterdam flat tracker
 
 A small personal website that lists flats for rent and for sale in Amsterdam
-that match my filters. A robot on GitHub refreshes it every morning at about
-07:30 Amsterdam time.
+that match my filters. A robot on GitHub refreshes it three times a day, at
+about 07:17, 13:17 and 19:17 Amsterdam time (an hour later in summer).
 
 ## What is in this folder
 
@@ -14,6 +14,7 @@ that match my filters. A robot on GitHub refreshes it every morning at about
 | `scraper/test_filters.py` | Automated tests: example listings that must pass or fail |
 | `scraper/run.py` | The daily run: collect, re-check, filter, save |
 | `scraper/sources/` | One small file per website that is read |
+| `scraper/alerts.py` | Reads the alert emails (read-only) for Funda, Pararius, Huurwoningen.nl, Hausing |
 | `scraper/lets.py` | Reads the rental period (dates and durations) from an ad |
 | `scraper/scam.py` | Scam signs, registration check and the tags |
 | `scraper/register.py` | Postcode lookup in the city's address register (exact addresses only) |
@@ -45,24 +46,46 @@ GitHub → your repository → **Actions** → **Update listings** → **Run wor
 
 ## If a run fails
 
-GitHub emails you when a run fails, and the website shows a warning next to
-"Last updated" when the data is more than a day old.
+A problem never stops the update. One failing source, or one listing that
+breaks a rule, is logged and skipped, and the rest is published. The top of
+the website shows **Last successful update** and **Last attempt**, with a
+warning when the last success is more than 24 hours old.
+
+A run is marked red (and GitHub emails you) only when every source failed,
+the run crashed, or an automated test failed. Even then the site is
+published first.
 
 1. Open **Actions** and click the run with the red cross, then **Re-run all
    jobs**. Most failures are a website being slow for a moment.
-2. If it fails again, click the step with the red cross and copy the last 20
-   or so lines of text.
-3. Open this folder in Claude and paste those lines: "The daily run failed
-   with this message, please fix it."
+2. If it fails again, tell Claude which step has the red cross.
+
+To get the emails: github.com → your picture → **Settings → Notifications →
+Actions**: tick **Email** and "Only notify for failed workflows".
 
 One website changing its layout does **not** fail the run. That source shows
-"✗ Failed" (or "returned no listings") under *Sources on the last run* at the
-bottom of the website, and the others carry on. Ask Claude to "fix the
-<name> source"; the fix is always inside that one file in `scraper/sources/`.
+"✗ Failed" under *Sources on the last run* at the bottom of the website.
 
-GitHub pauses timetables in repositories with no activity for 60 days. The
-daily save counts as activity, so this only matters after a long stretch of
-failures. If it happens, GitHub emails you and one click re-enables it.
+GitHub sometimes starts scheduled runs late or skips one when it is busy;
+that is why there are three a day. GitHub also pauses timetables in
+repositories with no activity for 60 days; the robot's own saves count as
+activity.
+
+## Email alerts (Funda, Pararius, Huurwoningen.nl, Hausing)
+
+These sites do not allow robots, so the robot never searches them. You set
+up their free email alerts, and each run reads those emails from Gmail
+(read-only) and takes the ad links from them. The listings then go through
+exactly the same rules as every other source.
+
+- Gmail address and app password are stored as GitHub repository secrets
+  named `GMAIL_ADDRESS` and `GMAIL_APP_PASSWORD` (*Settings → Secrets and
+  variables → Actions*). They are never in the code.
+- Until the secrets exist, these four sources show "○ Not set up".
+- Their ads cannot be re-checked by a robot, so a listing from an alert is
+  removed 14 days after it was first found (`EMAIL_LISTING_MAX_AGE_DAYS`).
+- If an email gives no size or bedroom count and the ad page may not be
+  opened, the listing is tagged "Check details on the ad". No postcode
+  always means no listing.
 
 ## Changing my filters
 
@@ -126,8 +149,8 @@ the site breaks a rule.
 The robot identifies itself honestly, reads each site's `robots.txt` and
 obeys it, waits at least two seconds between pages on the same site, and
 visits once a day. A site that refuses is left alone; nothing tries to get
-around a block. That is why Funda, Pararius and Huurwoningen.nl are not
-covered directly.
+around a block. That is why Funda, Pararius, Huurwoningen.nl and Hausing
+are read from their alert emails instead of from their websites.
 
 ## Test on my own Mac (optional)
 

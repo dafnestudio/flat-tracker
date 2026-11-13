@@ -24,12 +24,15 @@ from datetime import datetime, timezone
 import requests
 from bs4 import BeautifulSoup
 
+import alerts
 import common
 import filters
 import register
 import scam
 import sources
-from config import (BUY, COPIED_TEXT_SENTENCES, MAX_FAILED_CHECKS, OPEN_PLATFORMS,
+from config import (BUY, COPIED_TEXT_SENTENCES, EMAIL_ALERTS,
+                    EMAIL_LISTING_MAX_AGE_DAYS, EMAIL_LOOKBACK_DAYS,
+                    MAX_FAILED_CHECKS, OPEN_PLATFORMS, TAG_CHECK_DETAILS,
                     POSTCODES, RENT, RENT_STRETCH_MAX_PRICE, SOURCE_PRIORITY,
                     TYPE_FROM_AD_TEXT_SOURCES,
                     USE_ADDRESS_REGISTER)
@@ -52,35 +55,90 @@ TOTAL_PRICE_SOURCES = {"Kamernet"}
 
 
 def main():
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    """
+    Runs the update and ALWAYS writes the data file, so the website can
+    show when the last attempt was and whether it worked. A crash keeps
+    the previous listings on the site.
+    """
+    started = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     old = load_existing()
+    try:
+        output, worked, note = update(old)
+    except Exception as problem:      # never leave the site without a status
+        traceback.print_exc()
+        output = dict(old)
+        output.setdefault("listings", [])
+        worked, note = False, "The run stopped early: %s" % type(problem).__name__
+
+    output["last_attempt"] = started
+    output["last_attempt_ok"] = worked
+    output["last_attempt_note"] = note
+    # "updated" = the last SUCCESSFUL update (also used for "New today").
+    output["updated"] = started if worked else (old.get("updated") or started)
+    os.makedirs(os.path.dirname(DATA_FILE), exist_ok=True)
+    with open(DATA_FILE, "w", encoding="utf-8") as handle:
+        json.dump(output, handle, ensure_ascii=False, indent=1)
+
+    # A failed attempt still publishes; this exit code only makes GitHub
+    # mark the run red (after publishing) so that you get an email.
+    if not worked:
+        sys.exit("Update did not succeed: " + note)
+
+
+def update(old):
+    """One update. Returns (data for the website, worked?, note)."""
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     known = {item["url"]: item for item in old.get("listings", [])}
 
     # ---- 1. collect from every source -----------------------------------
-    report, candidates = [], {}
+    # One source failing never stops the others.
+    report, candidates, everything, active_names = [], {}, [], set()
     for name in sources.ACTIVE:
-        entry = {"name": name, "ok": False, "found": 0, "shown": 0, "note": ""}
+        entry = {"name": name, "ok": False, "state": "failed", "found": 0, "shown": 0, "note": ""}
         try:
             module = importlib.import_module("sources." + name)
             entry["name"] = module.NAME
+            active_names.add(module.NAME)
             found = module.collect()
             entry["found"] = len(found)
-            entry["ok"] = True
-            if not found:
+            entry["ok"], entry["state"] = True, "ok"
+            if not found and module.NAME in EMAIL_ALERTS:
+                entry["note"] = "No alert emails with listings in the last %d days." % EMAIL_LOOKBACK_DAYS
+            elif not found:
                 entry["note"] = ("Nothing found in Amsterdam today. If this stays at 0 for "
                                  "days, the site's layout may have changed.")
+            everything.extend(found)
             for item in found:
                 # ---- 2. rule out what the overview already tells us -----
                 if item["url"] and could_match(item):
                     candidates.setdefault(item["url"], item)
+        except alerts.NotSetUp:
+            entry["state"] = "setup"
+            entry["note"] = "Not set up yet: needs the email alert and the Gmail secrets."
         except common.Blocked as problem:
             entry["note"] = "Blocked: %s" % problem
         except Exception as problem:  # any bug or layout change in one source
             entry["note"] = "%s: %s" % (type(problem).__name__, str(problem)[:150])
             traceback.print_exc()
-        print("%-22s %s  found %-4d %s" % (entry["name"], "OK  " if entry["ok"] else "FAIL",
-                                           entry["found"], entry["note"]))
+        print("%-22s %-6s found %-4d %s" % (entry["name"], entry["state"].upper(),
+                                            entry["found"], entry["note"]))
         report.append(entry)
+
+    # ---- listings from sources that have been removed (e.g. Rentola) ----
+    # They go. If another source has the same home, that ad is shown
+    # instead and keeps the original "first found" date.
+    orphan_first_seen = {}
+    for url, item in list(known.items()):
+        if item["source"] in active_names:
+            continue
+        del known[url]
+        twins = [other for other in everything
+                 if street_of(other) == street_of(item)
+                 and house_number(other) and house_number(other) == house_number(item)]
+        where = ", ".join(sorted({"%s %s" % (t["source"], t["url"]) for t in twins})) or "no other source has it"
+        print("  - %-34s %s -> %s" % ("source removed: " + item["source"], item["address"], where))
+        if item.get("home_key"):
+            orphan_first_seen[item["home_key"]] = item["first_seen"]
 
     # ---- 3 + 4. check every ad, old and new -----------------------------
     result, removed = [], 0
@@ -89,7 +147,11 @@ def main():
         previous = known.get(url)
         fresh = candidates.get(url)
         item = merge(previous, fresh, today)
-        verdict = check_ad(item, fresh)
+        try:
+            verdict = check_ad(item, fresh)
+        except Exception as problem:  # one odd ad never stops the update
+            traceback.print_exc()
+            verdict = "could not be checked (%s)" % type(problem).__name__
         if verdict != "keep":
             removed += previous is not None
             print("  - %-34s %s" % (verdict[:34], url))
@@ -112,31 +174,62 @@ def main():
     removed += extra
     for item in result:
         item.pop("_sentences", None)
+        if item.get("home_key") in orphan_first_seen:
+            item["first_seen"] = min(item["first_seen"], orphan_first_seen[item["home_key"]])
+
+    # Last safety net: anything that would break a rule is dropped and
+    # logged here, so a bad listing can never block or reach the website.
+    for item in list(result):
+        problem = broken_rule(item)
+        if problem:
+            result.remove(item)
+            print("  - %-34s %s" % (("safety net: " + problem)[:34], item["url"]))
 
     for entry in report:
         entry["shown"] = sum(1 for item in result if item["source"] == entry["name"])
 
-    # ---- 5. save ---------------------------------------------------------
+    # ---- 5. hand back the data for the website --------------------------
     result.sort(key=lambda item: item["first_seen"], reverse=True)
     output = {
-        "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "filters": {"rent": RENT, "rent_stretch_max_price": RENT_STRETCH_MAX_PRICE,
                     "buy": BUY, "postcodes": sorted(POSTCODES)},
         "sources": report,
         "not_included": [{"name": n, "note": why} for n, why in sources.NOT_INCLUDED],
         "listings": result,
     }
-    os.makedirs(os.path.dirname(DATA_FILE), exist_ok=True)
-    with open(DATA_FILE, "w", encoding="utf-8") as handle:
-        json.dump(output, handle, ensure_ascii=False, indent=1)
-
     new = sum(1 for item in result if item["first_seen"] == today)
     print("\nDone: %d listings (%d new today, %d removed), %d page requests." % (
         len(result), new, removed, common.request_count))
 
-    # If every single source failed, mark the run as failed so you get an email.
-    if not any(entry["ok"] for entry in report):
-        sys.exit("Every source failed - see the messages above.")
+    failed = [entry["name"] for entry in report if entry["state"] == "failed"]
+    working = [entry for entry in report if entry["ok"]]
+    if not working:
+        return output, False, "Every source failed."
+    waiting = sum(1 for entry in report if entry["state"] == "setup")
+    note = ("%d of %d sources worked." % (len(working), len(report) - waiting)
+            + (" Failed: " + ", ".join(failed) + "." if failed else "")
+            + (" %d email-alert sources are not set up yet." % waiting if waiting else ""))
+    return output, True, note
+
+
+def broken_rule(item):
+    """Re-checks a finished listing against the rules, using what is stored."""
+    try:
+        facts = dict(item, price=item["base_price"], title=item["type_source"],
+                     type_text="", text="", status="",
+                     details_may_be_missing=TAG_CHECK_DETAILS in item.get("tags", []))
+        ok, reason = filters.check(facts)
+        if ok and item.get("tab") != filters.tab(facts):
+            return "wrong tab"
+        return "" if ok else reason
+    except Exception as problem:
+        return "incomplete listing (%s)" % type(problem).__name__
+
+
+def house_number(item):
+    """'Tugelaweg 139-F, Amsterdam' -> '139'."""
+    match = re.search(r"\s(\d+)", re.sub(r",.*$", "", item["address"]))
+    return match.group(1) if match else None
 
 
 def load_existing():
@@ -155,8 +248,8 @@ def could_match(item):
     """
     rule = RENT if item["kind"] == "rent" else BUY
     highest = RENT_STRETCH_MAX_PRICE if item["kind"] == "rent" else rule["max_price"]
-    if not item["price"] or item["price"] > highest:
-        return False
+    if item["price"] and item["price"] > highest:
+        return False            # (no price yet: the ad page may still give one)
     if item["m2"] and item["m2"] < rule["min_m2"]:
         return False
     if item["bedrooms"] is not None and item["bedrooms"] not in rule["bedrooms"]:
@@ -223,9 +316,19 @@ def check_ad(item, fresh):
         if item["failed_checks"] >= MAX_FAILED_CHECKS:
             return "unreachable"
 
+    # Ads from alert emails usually cannot be opened by a robot, so they
+    # cannot be re-checked for "let / sold". They expire instead.
+    from_email = item["source"] in EMAIL_ALERTS
+    if from_email and page is None:
+        found_on = datetime.strptime(item["first_seen"], "%Y-%m-%d").replace(tzinfo=timezone.utc)
+        if (datetime.now(timezone.utc) - found_on).days > EMAIL_LISTING_MAX_AGE_DAYS:
+            return "expired (cannot be re-checked)"
+
     if page:
         status += " | " + page["status"]
     page_text = page["text"] if page else ""
+    if not item.get("base_price") and page:
+        item["base_price"] = common.parse_price(page_text)
     text = list_text + " " + page_text
 
     # ---- what kind of home is it? ---------------------------------------
@@ -270,6 +373,9 @@ def check_ad(item, fresh):
         "price": item["base_price"], "service_costs": item["service_costs"],
         "m2": item.get("m2"), "bedrooms": item.get("bedrooms"),
         "start_date": item.get("start_date"), "end_date": item.get("end_date"),
+        # Only for alert-email ads whose page a robot may not open: size and
+        # bedrooms may be unknown. The postcode rule is never relaxed.
+        "details_may_be_missing": from_email and page is None,
     }
     item["home_key"] = home_key(item) if item.get("postcode") else None
     ok, reason = filters.check(facts)
@@ -304,6 +410,9 @@ def check_ad(item, fresh):
         if item["service_costs"]:
             item["tags"].append("Includes €%d service costs" % item["service_costs"])
         item.pop("warnings", None)
+    item["tags"] = [tag for tag in item["tags"] if tag != TAG_CHECK_DETAILS]
+    if not item.get("m2") or item.get("bedrooms") is None:
+        item["tags"].append(TAG_CHECK_DETAILS)
     if page and item["source"] in OPEN_PLATFORMS:
         item["_sentences"] = {s.strip().lower() for s in re.split(r"[.!?]", page_text)
                               if len(s.strip()) >= 80}

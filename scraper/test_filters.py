@@ -12,9 +12,14 @@ import os
 import unittest
 from datetime import date
 
+import re
+
+import alerts
 import common
+import config
 import filters
 import run
+import sources
 import lets
 import scam
 
@@ -200,6 +205,7 @@ class OnlyWholeHomes(unittest.TestCase):
                       "Zelfstandige woonruimte", "Portiekwoning in Amsterdam",
                       "Apartment for rent", "Appartement met parkeerplaats",
                       "Ruim 2-kamerappartement", "Te huur | ad text: appartement",
+                      "Beschikbare woning, 3 kamer(s) aan Beemsterstraat | ad text: appartement",
                       "Appartement Molenwerf + parkeerplaats"]:
             self.assertEqual(check(flat(title=title, type_text="")), (True, ""), title)
 
@@ -437,7 +443,7 @@ class LinksAndScams(unittest.TestCase):
             self.assertEqual(scam.judge(private, text)[0], "drop", text)
 
     def test_far_too_cheap_on_an_open_platform_is_dropped(self):
-        cheap = flat(source="Rentola", price=600, m2=60)
+        cheap = flat(source="Kamernet", price=600, m2=60)
         self.assertEqual(scam.judge(cheap, "Mooi appartement.")[0], "drop")
         self.assertEqual(scam.judge(cheap, "Middenhuur, inkomenseis geldt.")[0], "ok")
 
@@ -467,13 +473,132 @@ class Duplicates(unittest.TestCase):
 
     def test_same_home_on_two_sites_is_shown_once_agency_first(self):
         agency = self.home("VB&T", "Ceramiquelaan 441, Amsterdam", "2026-11-11")
-        copy = self.home("Rentola", "Céramiquelaan 441, 1031 KG Amsterdam", "2026-11-09")
-        other = self.home("Rentola", "Céramiquelaan 443, 1031 KG Amsterdam")
+        copy = self.home("Kamernet", "Céramiquelaan 441, 1031 KG Amsterdam", "2026-11-09")
+        other = self.home("Kamernet", "Céramiquelaan 443, 1031 KG Amsterdam")
         kept, dropped = run.drop_duplicates([copy, other, agency])
         self.assertEqual(dropped, 1)
-        self.assertEqual(sorted(item["source"] for item in kept), ["Rentola", "VB&T"])
+        self.assertEqual(sorted(item["source"] for item in kept), ["Kamernet", "VB&T"])
         self.assertEqual(agency["first_seen"], "2026-11-09")   # earliest sighting kept
         self.assertIn(other, kept)                             # the neighbour stays
+
+
+ALERT_EMAIL = """
+<html><body>
+<p>3 nieuwe woningen voor je zoekopdracht</p>
+<table><tr><td>
+  <a href="https://click.mail.example/track?u=https%3A%2F%2Fwww.pararius.nl%2Fappartement-te-huur%2Famsterdam%2Fab12cd34%2Fovertoom&x=1">
+    <img src="x.jpg"></a>
+  <a href="https://www.pararius.nl/appartement-te-huur/amsterdam/ab12cd34/overtoom?utm_source=alert">Appartement Overtoom</a>
+  <p>1054 HK Amsterdam (Oud-West)</p><p>€ 1.750 per maand</p><p>62 m² · 3 kamers</p>
+</td></tr><tr><td>
+  <a href="https://www.pararius.nl/kamer-te-huur/amsterdam/ff00ee11/bilderdijkstraat">Kamer Bilderdijkstraat</a>
+  <p>1053 KP Amsterdam</p><p>€ 950 per maand</p><p>55 m²</p>
+</td></tr></table>
+<a href="https://www.pararius.nl/mijn-pararius/zoekopdrachten/uitschrijven/123">Uitschrijven</a>
+<a href="https://click.mail.example/unsub?id=9">Unsubscribe</a>
+</body></html>
+"""
+
+
+class EmailAlerts(unittest.TestCase):
+    """Funda, Pararius, Huurwoningen.nl and Hausing arrive by email."""
+
+    def setUp(self):
+        self.pattern = re.compile(config.EMAIL_ALERTS["Pararius"]["ad_link"], re.I)
+
+    def test_ads_are_read_from_an_alert_email(self):
+        ads = alerts.ads_in_email(self.pattern, ALERT_EMAIL, "")
+        flat_url = "https://www.pararius.nl/appartement-te-huur/amsterdam/ab12cd34/overtoom"
+        self.assertIn(flat_url, ads)                       # tracking link unwrapped too
+        self.assertEqual(len(ads), 2)                      # the flat and the room
+        words = ads[flat_url]
+        self.assertEqual(common.parse_price(words), 1750)
+        self.assertEqual(common.parse_m2(words), 62)
+        self.assertEqual(common.parse_bedrooms(words), (2, True))
+        self.assertEqual(common.parse_postcode(words), "1054")
+
+    def test_unsubscribe_and_settings_links_are_never_followed(self):
+        before = alerts._lookups
+        for href, label in [("https://click.mail.example/unsub?id=9", "Unsubscribe"),
+                            ("https://click.mail.example/x/abc", "Uitschrijven"),
+                            ("https://click.mail.example/manage/abc", "Zoekopdracht"),
+                            ("https://click.mail.example/x/abc", "Wijzig je voorkeuren")]:
+            self.assertIsNone(alerts.ad_link(href, self.pattern, label))
+        self.assertEqual(alerts._lookups, before)          # no request was made
+
+    def test_email_listings_go_through_the_same_gate(self):
+        from_email = dict(source="Pararius", status="",
+                          url="https://www.pararius.nl/appartement-te-huur/amsterdam/ab12cd34/overtoom",
+                          title="Appartement Overtoom", type_text="appartement te huur")
+        self.assertEqual(check(flat(**from_email)), (True, ""))
+        self.assertFalse(check(flat(**dict(from_email, postcode="1077")))[0])
+        self.assertFalse(check(flat(**dict(from_email, price=2100)))[0])
+        room = dict(from_email, title="Kamer Bilderdijkstraat", type_text="kamer te huur")
+        self.assertFalse(check(flat(**room))[0])
+
+    def test_missing_size_or_bedrooms_may_be_tagged_but_never_the_postcode(self):
+        unknown = dict(source="Funda", m2=None, bedrooms=None, details_may_be_missing=True)
+        self.assertEqual(check(flat(**unknown)), (True, ""))
+        ok, why = check(flat(**dict(unknown, postcode=None)))
+        self.assertFalse(ok)
+        self.assertEqual(why, "no postcode")
+        # Known details must still obey the rules.
+        self.assertFalse(check(flat(**dict(unknown, m2=40)))[0])
+        self.assertFalse(check(flat(**dict(unknown, bedrooms=3)))[0])
+        # Without the flag (every ordinary source) missing details still fail.
+        self.assertFalse(check(flat(m2=None))[0])
+
+    def test_a_bot_check_page_instead_of_robots_txt_means_stay_out(self):
+        class Reply:
+            status_code, text = 200, "<!doctype html><html><title>Je bent bijna op de pagina</title>"
+        original = common._session.get
+        common._session.get = lambda *a, **k: Reply()
+        try:
+            self.assertFalse(common.allowed("https://blocked-portal.example/huur/amsterdam/"))
+        finally:
+            common._session.get = original
+
+    def test_no_password_or_address_in_the_code(self):
+        folder = os.path.dirname(os.path.abspath(__file__))
+        for name in ["alerts.py", "config.py", "run.py"]:
+            code = open(os.path.join(folder, name), encoding="utf-8").read()
+            self.assertNotRegex(code, r"@gmail\.com", name)
+            self.assertNotRegex(code, r"(?i)password\s*=\s*[\"'][^\"']+[\"']", name)
+
+
+class Reliability(unittest.TestCase):
+
+    def test_rentola_is_gone(self):
+        self.assertNotIn("rentola", sources.ACTIVE)
+        self.assertFalse(os.path.exists(os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "sources", "rentola.py")))
+
+    def test_safety_net_names_the_broken_rule(self):
+        good = dict(flat(), base_price=1700, type_source="Appartement Overtoom",
+                    tab="rent", tags=[])
+        self.assertEqual(run.broken_rule(good), "")
+        self.assertIn("1033", run.broken_rule(dict(good, postcode="1033")))
+        self.assertEqual(run.broken_rule(dict(good, tab="buy")), "wrong tab")
+        self.assertIn("incomplete", run.broken_rule({"url": "x"}))
+
+    def test_a_crashing_run_still_writes_a_status(self):
+        import json as _json, tempfile
+        original_file, original_update = run.DATA_FILE, run.update
+        with tempfile.TemporaryDirectory() as folder:
+            run.DATA_FILE = os.path.join(folder, "listings.json")
+            with open(run.DATA_FILE, "w") as handle:
+                _json.dump({"updated": "2026-11-12T15:25:36Z", "listings": [{"url": "kept"}]}, handle)
+            run.update = lambda old: (_ for _ in ()).throw(RuntimeError("boom"))
+            try:
+                with self.assertRaises(SystemExit):
+                    run.main()
+                saved = _json.load(open(run.DATA_FILE))
+            finally:
+                run.DATA_FILE, run.update = original_file, original_update
+        self.assertFalse(saved["last_attempt_ok"])
+        self.assertEqual(saved["updated"], "2026-11-12T15:25:36Z")   # last success unchanged
+        self.assertEqual(saved["listings"], [{"url": "kept"}])       # old listings kept
+        self.assertTrue(saved["last_attempt"] > saved["updated"])
 
 
 class TheWebsiteItself(unittest.TestCase):
@@ -485,12 +610,9 @@ class TheWebsiteItself(unittest.TestCase):
 
     def test_every_listing_passes_every_rule(self):
         for item in self.listings:
-            again = dict(item, price=item["base_price"], title=item["type_source"],
-                         type_text="", text="", status="")
-            ok, why = filters.check(again)
-            self.assertTrue(ok, "%s: %s" % (item["url"], why))
+            self.assertEqual(run.broken_rule(item), "", item["url"])
             self.assertIn(item["type"], ("Apartment", "Maisonette", "House"))
-            self.assertEqual(item.get("tab", item["kind"]), filters.tab(again), item["url"])
+            self.assertIn(item["postcode"], config.POSTCODES, item["url"])
             if item["kind"] == "rent":
                 months = item.get("fixed_term_months")
                 self.assertTrue(months is None or months >= 6, item["url"])
