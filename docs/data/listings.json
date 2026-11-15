@@ -68,7 +68,7 @@
    "name": "VB&T",
    "ok": true,
    "state": "ok",
-   "found": 44,
+   "found": 43,
    "shown": 7,
    "note": ""
   },
@@ -76,7 +76,7 @@
    "name": "NMG Wonen",
    "ok": true,
    "state": "ok",
-   "found": 19,
+   "found": 22,
    "shown": 0,
    "note": ""
   },
@@ -132,7 +132,7 @@
    "name": "Kamernet",
    "ok": true,
    "state": "ok",
-   "found": 101,
+   "found": 98,
    "shown": 0,
    "note": ""
   },
@@ -140,7 +140,7 @@
    "name": "HousingAnywhere",
    "ok": true,
    "state": "ok",
-   "found": 6,
+   "found": 5,
    "shown": 0,
    "note": ""
   },
@@ -1290,8 +1290,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-14T22:21:26Z",
+ "last_attempt": "2026-11-15T13:56:33Z",
  "last_attempt_ok": true,
  "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-14T22:21:26Z"
+ "updated": "2026-11-15T13:56:33Z"
 }
