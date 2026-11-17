@@ -132,7 +132,7 @@
    "name": "Kamernet",
    "ok": true,
    "state": "ok",
-   "found": 98,
+   "found": 97,
    "shown": 0,
    "note": ""
   },
@@ -1291,8 +1291,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-16T22:05:23Z",
+ "last_attempt": "2026-11-17T01:51:46Z",
  "last_attempt_ok": true,
  "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-16T22:05:23Z"
+ "updated": "2026-11-17T01:51:46Z"
 }
