@@ -76,7 +76,7 @@
    "name": "NMG Wonen",
    "ok": true,
    "state": "ok",
-   "found": 16,
+   "found": 18,
    "shown": 0,
    "note": ""
   },
@@ -86,7 +86,7 @@
    "state": "failed",
    "found": 0,
    "shown": 0,
-   "note": "HTTPError: 404 Client Error: Not Found for url: https://fris.nl/volledige-woningaanbod/"
+   "note": "HTTPError: 404 Client Error: Not Found for url: https://fris.nl/volledige-woningaanbod/page/2/"
   },
   {
    "name": "Rotsvast",
@@ -114,33 +114,33 @@
   },
   {
    "name": "JLG Real Estate",
-   "ok": true,
-   "state": "ok",
-   "found": 52,
+   "ok": false,
+   "state": "failed",
+   "found": 0,
    "shown": 0,
-   "note": ""
+   "note": "Blocked: robots.txt does not allow https://jlgrealestate.com/woningen/huur/"
   },
   {
    "name": "Heimstaden",
    "ok": true,
    "state": "ok",
-   "found": 1,
+   "found": 2,
    "shown": 0,
    "note": ""
   },
   {
    "name": "Kamernet",
-   "ok": false,
-   "state": "failed",
-   "found": 0,
+   "ok": true,
+   "state": "ok",
+   "found": 91,
    "shown": 0,
-   "note": "HTTPError: 500 Server Error: Internal Server Error for url: https://kamernet.nl/huren/appartement-amsterdam"
+   "note": ""
   },
   {
    "name": "HousingAnywhere",
    "ok": true,
    "state": "ok",
-   "found": 6,
+   "found": 7,
    "shown": 0,
    "note": ""
   },
@@ -1260,8 +1260,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-17T20:57:07Z",
+ "last_attempt": "2026-11-18T00:57:01Z",
  "last_attempt_ok": true,
- "last_attempt_note": "10 of 12 sources worked. Failed: Fris, Kamernet. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-17T20:57:07Z"
+ "last_attempt_note": "10 of 12 sources worked. Failed: Fris, JLG Real Estate. 4 email-alert sources are not set up yet.",
+ "updated": "2026-11-18T00:57:01Z"
 }
