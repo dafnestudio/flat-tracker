@@ -68,8 +68,8 @@
    "name": "VB&T",
    "ok": true,
    "state": "ok",
-   "found": 43,
-   "shown": 10,
+   "found": 42,
+   "shown": 9,
    "note": ""
   },
   {
@@ -1034,42 +1034,6 @@
   {
    "source": "VB&T",
    "kind": "rent",
-   "url": "https://vbtverhuurmakelaars.nl/woning/amsterdam-grasweg-158",
-   "address": "Grasweg 158, Amsterdam",
-   "city": "Amsterdam",
-   "m2": 74,
-   "bedrooms": 2,
-   "bedrooms_estimated": true,
-   "postcode": "1031",
-   "posted": null,
-   "title": "",
-   "type_text": "Appartement",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 1728,
-   "first_seen": "2026-11-16",
-   "failed_checks": 0,
-   "type_source": "Appartement | Appartement Grasweg 158 Amsterdam Te Huur | vb&t Verhuurmakelaars | Grasweg 158 | Appartement Soort bouw Bestaande bouw Bouwjaa",
-   "service_costs": 78,
-   "home_key": "rent:1031:grasweg158",
-   "tab": "rent_stretch",
-   "type": "Apartment",
-   "price": 1806,
-   "area": "Noord",
-   "neighbourhood": "Overhoeks / Van der Pek / Buiksloterham",
-   "favourite": false,
-   "rental_period": "Minimum 12 months",
-   "fixed_term_months": null,
-   "registration": "not stated",
-   "tags": [
-    "Registration: ask",
-    "Bedrooms worked out from rooms",
-    "Includes €78 service costs"
-   ]
-  },
-  {
-   "source": "VB&T",
-   "kind": "rent",
    "url": "https://vbtverhuurmakelaars.nl/woning/amsterdam-ceramiquelaan-489",
    "address": "Ceramiquelaan 489, Amsterdam",
    "city": "Amsterdam",
@@ -1558,8 +1522,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-19T20:39:30Z",
+ "last_attempt": "2026-11-20T00:36:10Z",
  "last_attempt_ok": true,
  "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-19T20:39:30Z"
+ "updated": "2026-11-20T00:36:10Z"
 }
