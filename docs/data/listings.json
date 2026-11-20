@@ -53,14 +53,14 @@
    "ok": true,
    "state": "ok",
    "found": 286,
-   "shown": 12,
+   "shown": 11,
    "note": ""
   },
   {
    "name": "Van der Linden",
    "ok": true,
    "state": "ok",
-   "found": 145,
+   "found": 144,
    "shown": 15,
    "note": ""
   },
@@ -76,7 +76,7 @@
    "name": "NMG Wonen",
    "ok": true,
    "state": "ok",
-   "found": 15,
+   "found": 17,
    "shown": 0,
    "note": ""
   },
@@ -100,7 +100,7 @@
    "name": "123Wonen",
    "ok": true,
    "state": "ok",
-   "found": 49,
+   "found": 50,
    "shown": 0,
    "note": ""
   },
@@ -132,7 +132,7 @@
    "name": "Kamernet",
    "ok": true,
    "state": "ok",
-   "found": 102,
+   "found": 100,
    "shown": 0,
    "note": ""
   },
@@ -819,42 +819,6 @@
   {
    "source": "ikwilhuren.nu (MVGM)",
    "kind": "rent",
-   "url": "https://ikwilhuren.nu/object/amsterdam-1019rb-943-sumatrakade-27435b6c1f802bd5193c2bcd4a71dbb2/",
-   "address": "Sumatrakade 943 1019RB Amsterdam",
-   "city": "Amsterdam",
-   "m2": 62,
-   "bedrooms": 1,
-   "bedrooms_estimated": false,
-   "postcode": "1019",
-   "posted": null,
-   "title": "",
-   "type_text": "Appartement",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 1485,
-   "first_seen": "2026-11-19",
-   "failed_checks": 0,
-   "type_source": "Appartement | MVGM - Te huur: Sumatrakade 943, amsterdam | Te huur: Sumatrakade 943",
-   "service_costs": 65,
-   "home_key": "rent:1019:sumatrakade943",
-   "tab": "rent",
-   "type": "Apartment",
-   "price": 1550,
-   "area": "Oost",
-   "neighbourhood": "Oostelijk Havengebied",
-   "favourite": false,
-   "rental_period": "Fixed term: 12 months",
-   "fixed_term_months": 12,
-   "registration": "not stated",
-   "tags": [
-    "Fixed term: 12 months",
-    "Registration: ask",
-    "Includes €65 service costs"
-   ]
-  },
-  {
-   "source": "ikwilhuren.nu (MVGM)",
-   "kind": "rent",
    "url": "https://ikwilhuren.nu/object/amsterdam-1019rj-1213-sumatrakade-2d29e89fbf8e2582e16d2c7beba0df15/",
    "address": "Sumatrakade 1213 1019RJ Amsterdam",
    "city": "Amsterdam",
@@ -1522,8 +1486,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-20T15:27:33Z",
+ "last_attempt": "2026-11-20T20:23:45Z",
  "last_attempt_ok": true,
  "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-20T15:27:33Z"
+ "updated": "2026-11-20T20:23:45Z"
 }
