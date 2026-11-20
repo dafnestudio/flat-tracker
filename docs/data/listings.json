@@ -52,7 +52,7 @@
    "name": "ikwilhuren.nu (MVGM)",
    "ok": true,
    "state": "ok",
-   "found": 283,
+   "found": 286,
    "shown": 12,
    "note": ""
   },
@@ -60,7 +60,7 @@
    "name": "Van der Linden",
    "ok": true,
    "state": "ok",
-   "found": 147,
+   "found": 145,
    "shown": 15,
    "note": ""
   },
@@ -68,7 +68,7 @@
    "name": "VB&T",
    "ok": true,
    "state": "ok",
-   "found": 42,
+   "found": 43,
    "shown": 9,
    "note": ""
   },
@@ -76,7 +76,7 @@
    "name": "NMG Wonen",
    "ok": true,
    "state": "ok",
-   "found": 16,
+   "found": 15,
    "shown": 0,
    "note": ""
   },
@@ -132,7 +132,7 @@
    "name": "Kamernet",
    "ok": true,
    "state": "ok",
-   "found": 97,
+   "found": 102,
    "shown": 0,
    "note": ""
   },
@@ -1522,8 +1522,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-20T00:36:10Z",
+ "last_attempt": "2026-11-20T15:27:33Z",
  "last_attempt_ok": true,
  "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-20T00:36:10Z"
+ "updated": "2026-11-20T15:27:33Z"
 }
