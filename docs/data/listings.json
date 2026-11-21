@@ -76,7 +76,7 @@
    "name": "NMG Wonen",
    "ok": true,
    "state": "ok",
-   "found": 17,
+   "found": 15,
    "shown": 0,
    "note": ""
   },
@@ -132,7 +132,7 @@
    "name": "Kamernet",
    "ok": true,
    "state": "ok",
-   "found": 100,
+   "found": 99,
    "shown": 0,
    "note": ""
   },
@@ -1486,8 +1486,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-20T20:23:45Z",
+ "last_attempt": "2026-11-20T23:58:33Z",
  "last_attempt_ok": true,
  "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-20T20:23:45Z"
+ "updated": "2026-11-20T23:58:33Z"
 }
