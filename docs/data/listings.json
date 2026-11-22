@@ -53,7 +53,7 @@
    "ok": true,
    "state": "ok",
    "found": 280,
-   "shown": 10,
+   "shown": 9,
    "note": ""
   },
   {
@@ -76,7 +76,7 @@
    "name": "NMG Wonen",
    "ok": true,
    "state": "ok",
-   "found": 17,
+   "found": 14,
    "shown": 0,
    "note": ""
   },
@@ -132,7 +132,7 @@
    "name": "Kamernet",
    "ok": true,
    "state": "ok",
-   "found": 103,
+   "found": 105,
    "shown": 0,
    "note": ""
   },
@@ -1415,43 +1415,10 @@
    "rental_period": "Minimum 12 months",
    "fixed_term_months": null,
    "tab": "rent"
-  },
-  {
-   "source": "ikwilhuren.nu (MVGM)",
-   "kind": "rent",
-   "url": "https://ikwilhuren.nu/object/amsterdam-1043nz-251-a-radarweg-330b2377b1f5332cb3ef2a55ac96099b/",
-   "address": "Radarweg 251 A 1043NZ Amsterdam",
-   "price": 1625,
-   "m2": 57,
-   "bedrooms": 1,
-   "bedrooms_estimated": false,
-   "postcode": "1043",
-   "posted": null,
-   "first_seen": "2026-11-11",
-   "failed_checks": 0,
-   "area": "Sloterdijk",
-   "neighbourhood": "Sloterdijk / Teleport",
-   "favourite": false,
-   "registration": "not stated",
-   "tags": [
-    "Check rental period",
-    "Registration: ask",
-    "Includes €80 service costs"
-   ],
-   "base_price": 1545,
-   "type_text": "Appartement",
-   "city": "Amsterdam",
-   "type_source": "Appartement | MVGM - Te huur: Radarweg 251 a, amsterdam | Te huur: Radarweg 251 A",
-   "service_costs": 80,
-   "type": "Apartment",
-   "home_key": "rent:1043:radarweg251a",
-   "rental_period": "Not stated",
-   "fixed_term_months": null,
-   "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-21T23:13:17Z",
+ "last_attempt": "2026-11-22T14:35:10Z",
  "last_attempt_ok": true,
  "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-21T23:13:17Z"
+ "updated": "2026-11-22T14:35:10Z"
 }
