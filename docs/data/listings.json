@@ -68,7 +68,7 @@
    "name": "VB&T",
    "ok": true,
    "state": "ok",
-   "found": 46,
+   "found": 45,
    "shown": 9,
    "note": ""
   },
@@ -76,7 +76,7 @@
    "name": "NMG Wonen",
    "ok": true,
    "state": "ok",
-   "found": 16,
+   "found": 15,
    "shown": 0,
    "note": ""
   },
@@ -132,7 +132,7 @@
    "name": "Kamernet",
    "ok": true,
    "state": "ok",
-   "found": 107,
+   "found": 108,
    "shown": 0,
    "note": ""
   },
@@ -1276,8 +1276,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-24T17:44:50Z",
+ "last_attempt": "2026-11-24T22:28:14Z",
  "last_attempt_ok": true,
  "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-24T17:44:50Z"
+ "updated": "2026-11-24T22:28:14Z"
 }
