@@ -68,7 +68,7 @@
    "name": "VB&T",
    "ok": true,
    "state": "ok",
-   "found": 46,
+   "found": 49,
    "shown": 9,
    "note": ""
   },
@@ -76,7 +76,7 @@
    "name": "NMG Wonen",
    "ok": true,
    "state": "ok",
-   "found": 19,
+   "found": 17,
    "shown": 4,
    "note": ""
   },
@@ -362,6 +362,42 @@
    "tags": [
     "Registration: ask",
     "Includes €70 service costs"
+   ]
+  },
+  {
+   "source": "VB&T",
+   "kind": "rent",
+   "url": "https://vbtverhuurmakelaars.nl/woning/amsterdam-vluchtladderstraat-52",
+   "address": "Vluchtladderstraat 52, Amsterdam",
+   "city": "Amsterdam",
+   "m2": 60,
+   "bedrooms": 2,
+   "bedrooms_estimated": true,
+   "postcode": "1019",
+   "posted": null,
+   "title": "",
+   "type_text": "Appartement",
+   "start_date": null,
+   "end_date": null,
+   "base_price": 1550,
+   "first_seen": "2026-11-25",
+   "failed_checks": 0,
+   "type_source": "Appartement | Appartement Vluchtladderstraat 52 Amsterdam Te Huur | vb&t Verhuurmakelaars | Vluchtladderstraat 52 | Appartement Soort bouw Bestaande bouw Bouwjaa",
+   "service_costs": 91,
+   "home_key": "rent:1019:vluchtladderstraat52",
+   "tab": "rent",
+   "type": "Apartment",
+   "price": 1641,
+   "area": "Oost",
+   "neighbourhood": "Oostelijk Havengebied",
+   "favourite": false,
+   "rental_period": "Minimum 12 months",
+   "fixed_term_months": null,
+   "registration": "not stated",
+   "tags": [
+    "Registration: ask",
+    "Bedrooms worked out from rooms",
+    "Includes €91 service costs"
    ]
   },
   {
@@ -1285,39 +1321,6 @@
   {
    "source": "VB&T",
    "kind": "rent",
-   "url": "https://vbtverhuurmakelaars.nl/woning/amsterdam-spadinalaan-275",
-   "address": "Spadinalaan 275, Amsterdam",
-   "price": 1645,
-   "m2": 56,
-   "bedrooms": 1,
-   "bedrooms_estimated": true,
-   "postcode": "1031",
-   "posted": null,
-   "first_seen": "2026-11-11",
-   "failed_checks": 0,
-   "area": "Noord",
-   "neighbourhood": "Overhoeks / Van der Pek / Buiksloterham",
-   "favourite": false,
-   "registration": "not stated",
-   "tags": [
-    "Registration: ask",
-    "Bedrooms worked out from rooms",
-    "Includes €70 service costs"
-   ],
-   "base_price": 1575,
-   "type_text": "Appartement",
-   "city": "Amsterdam",
-   "type_source": "Appartement | Appartement Spadinalaan 275 Amsterdam Te Huur | vb&t Verhuurmakelaars | Spadinalaan 275 | Appartement Soort bouw Bestaande bouw Bouwjaa",
-   "service_costs": 70,
-   "type": "Apartment",
-   "home_key": "rent:1031:spadinalaan275",
-   "rental_period": "Minimum 12 months",
-   "fixed_term_months": null,
-   "tab": "rent"
-  },
-  {
-   "source": "VB&T",
-   "kind": "rent",
    "url": "https://vbtverhuurmakelaars.nl/woning/amsterdam-sausalitolaan-212",
    "address": "Sausalitolaan 212, Amsterdam",
    "price": 1695,
@@ -1416,8 +1419,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-25T17:14:10Z",
+ "last_attempt": "2026-11-25T21:43:29Z",
  "last_attempt_ok": true,
  "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-25T17:14:10Z"
+ "updated": "2026-11-25T21:43:29Z"
 }
