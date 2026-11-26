@@ -34,7 +34,7 @@ jobs:
     timeout-minutes: 60
     environment:
       name: github-pages
-      url: ${{ steps.publish.outputs.page_url }}
+      url: ${{ steps.publish.outputs.page_url || steps.publish_retry.outputs.page_url || steps.publish_last.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -80,6 +80,26 @@ jobs:
 
       - name: Publish the website
         id: publish
+        continue-on-error: true      # GitHub sometimes looks for the files too early
+        uses: actions/deploy-pages@v4
+
+      - name: Wait a minute before trying again
+        if: steps.publish.outcome == 'failure'
+        run: sleep 60
+
+      - name: Publish the website (second try)
+        id: publish_retry
+        if: steps.publish.outcome == 'failure'
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+
+      - name: Wait two more minutes before the last try
+        if: steps.publish.outcome == 'failure' && steps.publish_retry.outcome == 'failure'
+        run: sleep 120
+
+      - name: Publish the website (last try)
+        id: publish_last
+        if: steps.publish.outcome == 'failure' && steps.publish_retry.outcome == 'failure'
         uses: actions/deploy-pages@v4
 
       - name: Report problems (this is what triggers the email)
