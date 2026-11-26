@@ -76,7 +76,7 @@
    "name": "NMG Wonen",
    "ok": true,
    "state": "ok",
-   "found": 17,
+   "found": 20,
    "shown": 4,
    "note": ""
   },
@@ -1419,8 +1419,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-25T21:43:29Z",
+ "last_attempt": "2026-11-26T01:46:32Z",
  "last_attempt_ok": true,
  "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-25T21:43:29Z"
+ "updated": "2026-11-26T01:46:32Z"
 }
