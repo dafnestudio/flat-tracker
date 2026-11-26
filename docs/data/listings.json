@@ -60,15 +60,15 @@
    "name": "Van der Linden",
    "ok": true,
    "state": "ok",
-   "found": 151,
-   "shown": 12,
+   "found": 147,
+   "shown": 11,
    "note": ""
   },
   {
    "name": "VB&T",
    "ok": true,
    "state": "ok",
-   "found": 47,
+   "found": 46,
    "shown": 9,
    "note": ""
   },
@@ -76,8 +76,8 @@
    "name": "NMG Wonen",
    "ok": true,
    "state": "ok",
-   "found": 20,
-   "shown": 6,
+   "found": 21,
+   "shown": 5,
    "note": ""
   },
   {
@@ -257,41 +257,6 @@
    "tags": [
     "Registration: ask",
     "Includes €80 service costs"
-   ]
-  },
-  {
-   "source": "NMG Wonen",
-   "kind": "rent",
-   "url": "https://nmgwonen.nl/woning/amsterdam-plesostraat-159/",
-   "address": "Plesostraat 159 Amsterdam",
-   "city": "Amsterdam",
-   "m2": 70,
-   "bedrooms": 2,
-   "bedrooms_estimated": false,
-   "postcode": "1043",
-   "posted": null,
-   "title": "",
-   "type_text": "",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 1820,
-   "first_seen": "2026-11-26",
-   "failed_checks": 0,
-   "type_source": "Amsterdam – Plesostraat 159 - nmgwonen.nl | Plesostraat 159 Amsterdam | ad text: huis",
-   "service_costs": 70,
-   "home_key": "rent:1043:plesostraat159",
-   "tab": "rent_stretch",
-   "type": "House",
-   "price": 1890,
-   "area": "Sloterdijk",
-   "neighbourhood": "Sloterdijk / Teleport",
-   "favourite": false,
-   "rental_period": "Minimum 12 months",
-   "fixed_term_months": null,
-   "registration": "not stated",
-   "tags": [
-    "Registration: ask",
-    "Includes €70 service costs"
    ]
   },
   {
@@ -565,41 +530,6 @@
    "tab": "rent",
    "type": "Apartment",
    "price": 1785,
-   "area": "Oost",
-   "neighbourhood": "Oostelijk Havengebied",
-   "favourite": false,
-   "rental_period": "Fixed term: 12 months",
-   "fixed_term_months": 12,
-   "registration": "not stated",
-   "tags": [
-    "Fixed term: 12 months",
-    "Registration: ask"
-   ]
-  },
-  {
-   "source": "Van der Linden",
-   "kind": "rent",
-   "url": "https://www.vanderlinden.nl/huurwoning/Zeeburgerkade-1470-Amsterdam/2698/",
-   "address": "Zeeburgerkade 1470, Amsterdam",
-   "city": "Amsterdam",
-   "m2": 86,
-   "bedrooms": 2,
-   "bedrooms_estimated": false,
-   "postcode": "1019",
-   "posted": null,
-   "title": "",
-   "type_text": "",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 1905,
-   "first_seen": "2026-11-19",
-   "failed_checks": 0,
-   "type_source": "Zeeburgerkade 1470 Amsterdam te huur - Makelaardij Van der Linden | Zeeburgerkade 1470 | ad text: 3-kamerappartement",
-   "service_costs": 0,
-   "home_key": "rent:1019:zeeburgerkade1470",
-   "tab": "rent_stretch",
-   "type": "Apartment",
-   "price": 1905,
    "area": "Oost",
    "neighbourhood": "Oostelijk Havengebied",
    "favourite": false,
@@ -1453,8 +1383,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-26T16:54:40Z",
+ "last_attempt": "2026-11-26T21:34:25Z",
  "last_attempt_ok": true,
  "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-26T16:54:40Z"
+ "updated": "2026-11-26T21:34:25Z"
 }
