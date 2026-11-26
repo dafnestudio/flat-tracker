@@ -60,7 +60,7 @@
    "name": "Van der Linden",
    "ok": true,
    "state": "ok",
-   "found": 150,
+   "found": 151,
    "shown": 12,
    "note": ""
   },
@@ -68,7 +68,7 @@
    "name": "VB&T",
    "ok": true,
    "state": "ok",
-   "found": 48,
+   "found": 47,
    "shown": 9,
    "note": ""
   },
@@ -76,7 +76,7 @@
    "name": "NMG Wonen",
    "ok": true,
    "state": "ok",
-   "found": 17,
+   "found": 20,
    "shown": 6,
    "note": ""
   },
@@ -132,7 +132,7 @@
    "name": "Kamernet",
    "ok": true,
    "state": "ok",
-   "found": 115,
+   "found": 114,
    "shown": 0,
    "note": ""
   },
@@ -1453,8 +1453,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-26T13:44:38Z",
+ "last_attempt": "2026-11-26T16:54:40Z",
  "last_attempt_ok": true,
  "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-26T13:44:38Z"
+ "updated": "2026-11-26T16:54:40Z"
 }
