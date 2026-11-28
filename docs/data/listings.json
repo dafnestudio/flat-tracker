@@ -52,8 +52,8 @@
    "name": "ikwilhuren.nu (MVGM)",
    "ok": true,
    "state": "ok",
-   "found": 274,
-   "shown": 11,
+   "found": 270,
+   "shown": 9,
    "note": ""
   },
   {
@@ -68,7 +68,7 @@
    "name": "VB&T",
    "ok": true,
    "state": "ok",
-   "found": 43,
+   "found": 50,
    "shown": 8,
    "note": ""
   },
@@ -76,7 +76,7 @@
    "name": "NMG Wonen",
    "ok": true,
    "state": "ok",
-   "found": 22,
+   "found": 17,
    "shown": 0,
    "note": ""
   },
@@ -116,7 +116,7 @@
    "name": "JLG Real Estate",
    "ok": true,
    "state": "ok",
-   "found": 51,
+   "found": 52,
    "shown": 0,
    "note": ""
   },
@@ -329,42 +329,6 @@
     "Check rental period",
     "Registration: ask",
     "Includes €75 service costs"
-   ]
-  },
-  {
-   "source": "ikwilhuren.nu (MVGM)",
-   "kind": "rent",
-   "url": "https://ikwilhuren.nu/object/amsterdam-1031hm-291-asterweg-da8609836439cf3077a7d5b570fc2394/",
-   "address": "Asterweg 291 1031HM Amsterdam",
-   "city": "Amsterdam",
-   "m2": 63,
-   "bedrooms": 2,
-   "bedrooms_estimated": false,
-   "postcode": "1031",
-   "posted": null,
-   "title": "",
-   "type_text": "Appartement",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 1855,
-   "first_seen": "2026-11-27",
-   "failed_checks": 0,
-   "type_source": "Appartement | MVGM - Te huur: Asterweg 291, amsterdam | Te huur: Asterweg 291",
-   "service_costs": 110,
-   "home_key": "rent:1031:asterweg291",
-   "tab": "rent_stretch",
-   "type": "Apartment",
-   "price": 1965,
-   "area": "Noord",
-   "neighbourhood": "Overhoeks / Van der Pek / Buiksloterham",
-   "favourite": false,
-   "rental_period": "Not stated",
-   "fixed_term_months": null,
-   "registration": "not stated",
-   "tags": [
-    "Check rental period",
-    "Registration: ask",
-    "Includes €110 service costs"
    ]
   },
   {
@@ -857,42 +821,6 @@
   {
    "source": "ikwilhuren.nu (MVGM)",
    "kind": "rent",
-   "url": "https://ikwilhuren.nu/object/amsterdam-1019pz-827-sumatrakade-9ffca0a12699eeaa1539e75c24a14248/",
-   "address": "Sumatrakade 827 1019PZ Amsterdam",
-   "city": "Amsterdam",
-   "m2": 68,
-   "bedrooms": 1,
-   "bedrooms_estimated": false,
-   "postcode": "1019",
-   "posted": null,
-   "title": "",
-   "type_text": "Appartement",
-   "start_date": null,
-   "end_date": null,
-   "base_price": 1640,
-   "first_seen": "2026-11-19",
-   "failed_checks": 0,
-   "type_source": "Appartement | MVGM - Te huur: Sumatrakade 827, amsterdam | Te huur: Sumatrakade 827",
-   "service_costs": 65,
-   "home_key": "rent:1019:sumatrakade827",
-   "tab": "rent",
-   "type": "Apartment",
-   "price": 1705,
-   "area": "Oost",
-   "neighbourhood": "Oostelijk Havengebied",
-   "favourite": false,
-   "rental_period": "Not stated",
-   "fixed_term_months": null,
-   "registration": "not stated",
-   "tags": [
-    "Check rental period",
-    "Registration: ask",
-    "Includes €65 service costs"
-   ]
-  },
-  {
-   "source": "ikwilhuren.nu (MVGM)",
-   "kind": "rent",
    "url": "https://ikwilhuren.nu/object/amsterdam-1019rj-1213-sumatrakade-2d29e89fbf8e2582e16d2c7beba0df15/",
    "address": "Sumatrakade 1213 1019RJ Amsterdam",
    "city": "Amsterdam",
@@ -1314,8 +1242,8 @@
    "tab": "rent"
   }
  ],
- "last_attempt": "2026-11-28T01:26:42Z",
+ "last_attempt": "2026-11-28T15:31:45Z",
  "last_attempt_ok": true,
  "last_attempt_note": "12 of 12 sources worked. 4 email-alert sources are not set up yet.",
- "updated": "2026-11-28T01:26:42Z"
+ "updated": "2026-11-28T15:31:45Z"
 }
